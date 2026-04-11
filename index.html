@@ -16,202 +16,21 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/global.css">
 
   <script>
-    // Pick a random tint from the sacred.computer tint system
+    // Must run before paint to avoid flash
     const tints = ['', 'green', 'blue', 'red', 'yellow', 'purple', 'orange', 'pink'];
     const tint = tints[Math.floor(Math.random() * tints.length)];
     if (tint) document.documentElement.setAttribute('data-tint', tint);
 
-    // Apply stored override before paint (no override = follow CSS media query)
     const stored = localStorage.getItem('theme');
     if (stored) document.documentElement.setAttribute('data-mode', stored);
   </script>
 
   <style>
-    /* ── Reset ── */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      border: 0;
-      margin: 0;
-      padding: 0;
-      vertical-align: baseline;
-    }
+    /* ── Page-specific styles ── */
 
-    /* ── Sacred Computer design tokens ── */
-    :root {
-      --color-black: #000;
-      --color-white: #fff;
-      --color-bright-green: #55ff55;
-      --color-gray-89: #e4e4e4;
-      --color-gray-78: #c6c6c6;
-      --color-gray-66: #a8a8a8;
-      --color-gray-54: #8a8a8a;
-      --color-gray-89-border-alpha: #e4e4e499;
-
-      --theme-background: var(--color-white);
-      --theme-text: var(--color-black);
-      --theme-border: var(--color-gray-89);
-      --theme-border-subdued: var(--color-gray-89-border-alpha);
-      --theme-window-background: var(--color-gray-89);
-      --theme-window-shadow: var(--color-gray-66);
-      --theme-focused-foreground: var(--color-bright-green);
-      --theme-button-foreground: var(--color-gray-78);
-      --theme-button-background: var(--color-gray-89);
-
-      --font-family-mono: 'Geist Mono', 'GeistMono-Regular', Consolas, monaco, monospace;
-      --theme-line-height-base: 1.25;
-      --font-size: 16px;
-    }
-
-    /* ── Dark mode — system default ── */
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-mode="light"]) {
-        --theme-background:         #000;
-        --theme-text:               #fff;
-        --theme-border:             #3a3a3a;
-        --theme-border-subdued:     #3a3a3a4d;
-        --theme-window-background:  #3a3a3a;
-        --theme-window-shadow:      #262626;
-        --theme-focused-foreground: oklch(from #f0f .55 c h);
-        --theme-button-foreground:  #262626;
-        --theme-button-background:  #3a3a3a;
-      }
-
-      :root:not([data-mode="light"]) [data-tint] {
-        --theme-background:         oklch(from var(--tint) .14 calc(c * .18) h);
-        --theme-window-background:  oklch(from var(--tint) .24 calc(c * .22) h);
-        --theme-border:             oklch(from var(--tint) .40 calc(c * .28) h);
-        --theme-border-subdued:     oklch(from var(--tint) .40 calc(c * .28) h / .6);
-        --theme-text:               oklch(from var(--tint) .92 calc(c * .15) h);
-        --theme-button-foreground:  oklch(from var(--tint) .30 calc(c * .24) h);
-        --theme-button-background:  oklch(from var(--tint) .24 calc(c * .22) h);
-        --theme-focused-foreground: oklch(from var(--tint) .62 c h);
-        --theme-window-shadow:      oklch(from var(--tint) .18 calc(c * .15) h);
-      }
-    }
-
-    /* ── Dark mode — explicit override ── */
-    [data-mode="dark"] {
-      --theme-background:         #000;
-      --theme-text:               #fff;
-      --theme-border:             #3a3a3a;
-      --theme-border-subdued:     #3a3a3a4d;
-      --theme-window-background:  #3a3a3a;
-      --theme-window-shadow:      #262626;
-      --theme-focused-foreground: oklch(from #f0f .55 c h);
-      --theme-button-foreground:  #262626;
-      --theme-button-background:  #3a3a3a;
-    }
-
-    [data-mode="dark"] [data-tint] {
-      --theme-background:         oklch(from var(--tint) .14 calc(c * .18) h);
-      --theme-window-background:  oklch(from var(--tint) .24 calc(c * .22) h);
-      --theme-border:             oklch(from var(--tint) .40 calc(c * .28) h);
-      --theme-border-subdued:     oklch(from var(--tint) .40 calc(c * .28) h / .6);
-      --theme-text:               oklch(from var(--tint) .92 calc(c * .15) h);
-      --theme-button-foreground:  oklch(from var(--tint) .30 calc(c * .24) h);
-      --theme-button-background:  oklch(from var(--tint) .24 calc(c * .22) h);
-      --theme-focused-foreground: oklch(from var(--tint) .62 c h);
-      --theme-window-shadow:      oklch(from var(--tint) .18 calc(c * .15) h);
-    }
-
-    /* ── Tint system (exact oklch formulas from sacred.computer) ── */
-    [data-tint="green"] {
-      --tint: #39ff44;
-    }
-
-    [data-tint="blue"] {
-      --tint: #0047ff;
-    }
-
-    [data-tint="red"] {
-      --tint: red;
-    }
-
-    [data-tint="yellow"] {
-      --tint: #e4f221;
-    }
-
-    [data-tint="purple"] {
-      --tint: #8000ff;
-    }
-
-    [data-tint="orange"] {
-      --tint: #ffac1c;
-    }
-
-    [data-tint="pink"] {
-      --tint: #f0f;
-    }
-
-    [data-tint] {
-      --theme-background: oklch(from var(--tint) .97 calc(c * .10) h);
-      --theme-window-background: oklch(from var(--tint) .92 calc(c * .18) h);
-      --theme-border: oklch(from var(--tint) .84 calc(c * .28) h);
-      --theme-border-subdued: oklch(from var(--tint) .92 calc(c * .18) h);
-      --theme-text: oklch(from var(--tint) .18 calc(c * .40) h);
-      --theme-button-foreground: oklch(from var(--tint) .86 calc(c * .22) h);
-      --theme-button-background: oklch(from var(--tint) .92 calc(c * .18) h);
-      --theme-focused-foreground: oklch(from var(--tint) .62 c h);
-      --theme-window-shadow: oklch(from var(--tint) .70 calc(c * .28) h);
-    }
-
-    /* ── Base ── */
-    html,
-    body {
-      background: var(--theme-background);
-      color: var(--theme-text);
-      font-family: var(--font-family-mono);
-      line-height: calc(var(--theme-line-height-base) * 1rem);
-      font-size: var(--font-size);
-      font-optical-sizing: auto;
-      text-rendering: geometricPrecision;
-      font-variant-numeric: tabular-nums lining-nums;
-      font-weight: 400;
-      min-height: 100vh;
-    }
-
-    /* ── Link style (sacred.computer default) ── */
-    a {
-      background: var(--theme-border-subdued);
-      color: var(--theme-text);
-      text-decoration: none;
-    }
-
-    a:hover,
-    a:focus {
-      background: var(--theme-focused-foreground);
-      color: var(--theme-text);
-      outline: 0;
-    }
-
-    /* ── Layout ── */
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: calc(var(--theme-line-height-base) * var(--font-size) * 3) 2ch;
-    }
-
-    main {
-      max-width: 64ch;
-      min-width: min(24ch, 100%);
-      width: 100%;
-    }
-
-    /* ── Window component ──
-           1ch right + 1 row bottom drop shadow, per sacred.computer Window.tsx spec */
-    content {
-      display: block;
-      background: var(--theme-window-background);
-      box-shadow: 1ch calc(var(--theme-line-height-base) * 1rem) 0 0 var(--theme-window-shadow);
-      padding: calc(var(--font-size) * var(--theme-line-height-base)) 2ch;
-    }
-
-    /* ── Text ── */
     .intro {
       font-weight: 700;
       font-size: calc(var(--font-size) * 1.5);
@@ -223,8 +42,7 @@
       margin-top: calc(var(--theme-line-height-base) * 0.25rem);
     }
 
-    /* ── Social icons ──
-           Styled as sacred.computer ActionButton blocks: square gray cells, green on hover */
+    /* Styled as sacred.computer ActionButton blocks: square gray cells, green on hover */
     .icons-social {
       display: flex;
       gap: 1ch;
@@ -246,59 +64,6 @@
 
     .icons-social a:hover,
     .icons-social a:focus {
-      background: var(--theme-focused-foreground);
-      color: var(--theme-text);
-    }
-
-    /* ── Theme toggle ── */
-    #theme-toggle {
-      position: fixed;
-      top: 1ch;
-      right: 1ch;
-      background: none;
-      color: var(--theme-text);
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: var(--font-size);
-      width: calc(var(--font-size) * var(--theme-line-height-base) * 2);
-      height: calc(var(--font-size) * var(--theme-line-height-base) * 2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #theme-toggle:hover,
-    #theme-toggle:focus {
-      background: none;
-      color: var(--theme-focused-foreground);
-      outline: 0;
-    }
-
-    /* ── Footer ── */
-    footer {
-      margin-top: calc(var(--theme-line-height-base) * 1rem);
-      padding-top: calc(var(--theme-line-height-base) * 0.5rem);
-      box-shadow: inset 0 1px 0 0 var(--theme-border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: calc(var(--font-size) * 0.875);
-      color: var(--color-gray-54);
-    }
-
-    [data-tint] footer {
-      color: var(--theme-window-shadow);
-    }
-
-    footer a {
-      background: none;
-      color: inherit;
-      padding: 0 0.5ch;
-    }
-
-    footer a:hover,
-    footer a:focus {
       background: var(--theme-focused-foreground);
       color: var(--theme-text);
     }
@@ -329,35 +94,8 @@
       </a>
     </footer>
   </main>
+
+  <script src="/js/global.js"></script>
 </body>
-
-<script>
-  const btn = document.getElementById('theme-toggle');
-  const icon = btn.querySelector('i');
-  const mq = window.matchMedia('(prefers-color-scheme: dark)');
-
-  function isDark() {
-    const mode = document.documentElement.getAttribute('data-mode');
-    return mode ? mode === 'dark' : mq.matches;
-  }
-
-  function syncIcon() {
-    icon.className = isDark() ? 'far fa-sun' : 'far fa-moon';
-  }
-
-  syncIcon();
-
-  btn.addEventListener('click', () => {
-    const dark = !isDark();
-    document.documentElement.setAttribute('data-mode', dark ? 'dark' : 'light');
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
-    syncIcon();
-  });
-
-  // Keep icon in sync if system preference changes and no override is stored
-  mq.addEventListener('change', () => {
-    if (!localStorage.getItem('theme')) syncIcon();
-  });
-</script>
 
 </html>
