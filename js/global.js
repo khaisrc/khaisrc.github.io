@@ -8,7 +8,7 @@ function isDark() {
 }
 
 function syncIcon() {
-  icon.className = isDark() ? 'far fa-sun' : 'far fa-moon';
+  icon.className = isDark() ? 'fas fa-sun' : 'far fa-moon';
 }
 
 syncIcon();
