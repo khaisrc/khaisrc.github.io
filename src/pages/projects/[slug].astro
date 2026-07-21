@@ -1,0 +1,100 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import { ChevronRight, ExternalLink } from "@lucide/astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = (await getCollection("projects", ({ data }) => !data.draft)).sort(
+    (a, b) => a.data.order - b.data.order,
+  );
+
+  return projects.map((project, index) => ({
+    params: { slug: project.id },
+    props: {
+      project,
+      previous: projects[index - 1] ?? projects.at(-1),
+      next: projects[index + 1] ?? projects[0],
+    },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  previous: CollectionEntry<"projects">;
+  next: CollectionEntry<"projects">;
+}
+
+const { project, previous, next } = Astro.props;
+const { Content, headings } = await render(project);
+const description = project.data.description;
+---
+
+<BaseLayout title={`${project.data.title} | Khai Nguyen`} description={description}>
+  <article>
+    <header class="project-hero">
+      <div class="shell">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a><ChevronRight size={14} aria-hidden="true" />
+          <a href="/#projects">Projects</a><ChevronRight size={14} aria-hidden="true" />
+          <span aria-current="page">{project.data.title}</span>
+        </nav>
+        <div class="project-hero-grid">
+          <div>
+            <p class="eyebrow">{project.data.company}</p>
+            <h1>{project.data.title}</h1>
+            <p class="project-summary">{project.data.summary}</p>
+            <ul class="tech-list" aria-label="Technology stack">
+              {project.data.techStack.map((tech) => <li class="tech-item">{tech}</li>)}
+            </ul>
+          </div>
+          <dl class="project-meta">
+            <div class="meta-row"><dt class="meta-label">Company</dt><dd>
+              {project.data.companyUrl ? (
+                <a href={project.data.companyUrl} target="_blank" rel="noreferrer">{project.data.company} <ExternalLink size={13} /></a>
+              ) : project.data.company}
+            </dd></div>
+            <div class="meta-row"><dt class="meta-label">Role</dt><dd>{project.data.role}</dd></div>
+            {project.data.period && <div class="meta-row"><dt class="meta-label">Period</dt><dd>{project.data.period}</dd></div>}
+            <div class="meta-row"><dt class="meta-label">Focus</dt><dd>{project.data.areas.join(", ")}</dd></div>
+          </dl>
+        </div>
+      </div>
+    </header>
+
+    {project.data.metrics.length > 0 && (
+      <section class="metrics-panel" aria-label="Project outcomes">
+        <div class="shell metrics-grid">
+          {project.data.metrics.map((metric) => (
+            <div class="metric">
+              <span class="metric-value">{metric.value}</span>
+              <span class="metric-label">{metric.label}</span>
+              {metric.context && <span class="metric-context">{metric.context}</span>}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <div class="shell case-study">
+      <aside class="case-study-nav" aria-label="On this page">
+        <p>On this page</p>
+        {headings.filter((heading) => heading.depth === 2).map((heading) => (
+          <a href={`#${heading.slug}`}>{heading.text}</a>
+        ))}
+      </aside>
+      <div>
+        <div class="prose"><Content /></div>
+        <nav class="project-pagination" aria-label="Project navigation">
+          <a class="pagination-link" href={`/projects/${previous.id}/`}>
+            <span class="pagination-label">Previous project</span>
+            <span class="pagination-title">{previous.data.title}</span>
+          </a>
+          <a class="pagination-link" href={`/projects/${next.id}/`}>
+            <span class="pagination-label">Next project</span>
+            <span class="pagination-title">{next.data.title}</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

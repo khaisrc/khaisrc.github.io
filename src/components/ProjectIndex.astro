@@ -1,0 +1,34 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ProjectCard from "./ProjectCard.astro";
+import ProjectFilters from "./ProjectFilters.astro";
+
+interface Props {
+  projects: CollectionEntry<"projects">[];
+  heading?: string;
+  intro?: string;
+  showFilters?: boolean;
+}
+
+const {
+  projects,
+  heading = "Selected engineering work",
+  intro = "Production systems explained through the problem, technical approach, and measurable result.",
+  showFilters = true,
+} = Astro.props;
+const filters = ["BlinkRx", "Apartments.com", "Healthcare", "Distributed Systems", "Integrations", "Reliability", "AI"];
+---
+
+<section class="section shell" id="projects" aria-labelledby="projects-title">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Project index</p>
+      <h2 id="projects-title">{heading}</h2>
+    </div>
+    <p>{intro}</p>
+  </div>
+  {showFilters && <ProjectFilters filters={filters} />}
+  <div class="project-grid">
+    {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+  </div>
+</section>

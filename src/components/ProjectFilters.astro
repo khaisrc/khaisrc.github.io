@@ -1,0 +1,32 @@
+---
+interface Props {
+  filters: string[];
+}
+
+const { filters } = Astro.props;
+---
+
+<div class="filter-bar" aria-label="Filter projects">
+  <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All projects</button>
+  {filters.map((filter) => (
+    <button class="filter-button" type="button" data-filter={filter.toLowerCase()} aria-pressed="false">
+      {filter}
+    </button>
+  ))}
+</div>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
+  const projects = document.querySelectorAll<HTMLElement>("[data-project]");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const selected = button.dataset.filter ?? "all";
+      buttons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+      projects.forEach((project) => {
+        const values = project.dataset.filters?.split("|") ?? [];
+        project.hidden = selected !== "all" && !values.includes(selected);
+      });
+    });
+  });
+</script>

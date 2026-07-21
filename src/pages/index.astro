@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content";
+import { ArrowDown, BriefcaseBusiness, CodeXml, Download } from "@lucide/astro";
+import ProjectIndex from "../components/ProjectIndex.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const projects = (await getCollection("projects", ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout>
+  <section class="hero shell">
+    <div>
+      <p class="eyebrow">California · Staff-level software engineer</p>
+      <h1>Systems that move from <span class="accent">complexity</span> to dependable outcomes.</h1>
+      <p class="hero-copy">
+        I build backend platforms, distributed workflows, and full-stack products across healthcare,
+        real estate, and lending.
+      </p>
+      <div class="hero-actions">
+        <a class="primary-link" href="#projects">Explore projects <ArrowDown size={17} /></a>
+        <a class="secondary-link" href="/khai-nguyen-resume.pdf" download><Download size={17} /> Resume</a>
+        <a class="secondary-link" href="https://www.linkedin.com/in/khainguyen/" target="_blank" rel="noreferrer"><BriefcaseBusiness size={17} /> LinkedIn</a>
+        <a class="secondary-link" href="https://github.com/khaister" target="_blank" rel="noreferrer"><CodeXml size={17} /> GitHub</a>
+      </div>
+    </div>
+    <figure class="system-visual">
+      <img src="/systems-landscape.png" alt="Abstract diagram of connected services, data stores, queues, and operational signals" width="1200" height="800" />
+      <figcaption class="visual-caption">Architecture · Delivery · Operations</figcaption>
+    </figure>
+  </section>
+
+  <section class="evidence-band" aria-label="Career evidence">
+    <div class="shell evidence-grid">
+      <div class="evidence-item"><span class="evidence-value">10+ yrs</span><span class="evidence-label">software engineering experience</span></div>
+      <div class="evidence-item"><span class="evidence-value">59.5M</span><span class="evidence-label">monthly API requests on a system of record</span></div>
+      <div class="evidence-item"><span class="evidence-value">323K</span><span class="evidence-label">monthly insurance claims added through integrations</span></div>
+      <div class="evidence-item"><span class="evidence-value">8</span><span class="evidence-label">disaster recovery runbooks authored</span></div>
+    </div>
+  </section>
+
+  <ProjectIndex projects={projects} />
+</BaseLayout>

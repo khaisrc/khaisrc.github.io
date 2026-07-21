@@ -1,0 +1,91 @@
+---
+import { BriefcaseBusiness, CodeXml, Download } from "@lucide/astro";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "Khai Nguyen | Staff-Level Software Engineer",
+  description = "Project-based engineering portfolio covering backend platforms, distributed systems, integrations, and reliable production operations.",
+  image = "/social-card.png",
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL(image, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f7f7f3" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="/" aria-label="Khai Nguyen, home">
+          <span class="brand-mark" aria-hidden="true">KN</span>
+          <span>Khai Nguyen</span>
+        </a>
+        <div class="nav-links">
+          <a class="nav-link" href="/#projects">Projects</a>
+          <div class="profile-links" aria-label="Profile links">
+            <a class="icon-link" href="https://www.linkedin.com/in/khainguyen/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile" title="LinkedIn">
+              <BriefcaseBusiness size={18} />
+            </a>
+            <a class="icon-link" href="https://github.com/khaister" target="_blank" rel="noreferrer" aria-label="GitHub profile" title="GitHub">
+              <CodeXml size={18} />
+            </a>
+            <a class="icon-link" href="/khai-nguyen-resume.pdf" download aria-label="Download resume" title="Download resume">
+              <Download size={18} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main id="main-content">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <div>
+          <p class="footer-title">Khai Nguyen</p>
+          <p class="footer-copy">Backend platforms, distributed systems, and product engineering.</p>
+        </div>
+        <div class="footer-links">
+          <a class="icon-link" href="https://www.linkedin.com/in/khainguyen/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile" title="LinkedIn">
+            <BriefcaseBusiness size={18} />
+          </a>
+          <a class="icon-link" href="https://github.com/khaister" target="_blank" rel="noreferrer" aria-label="GitHub profile" title="GitHub">
+            <CodeXml size={18} />
+          </a>
+          <a class="text-link" href="/khai-nguyen-resume.pdf" download>
+            <Download size={16} /> Resume
+          </a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
