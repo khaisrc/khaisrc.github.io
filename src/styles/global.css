@@ -850,6 +850,7 @@ h3 {
   }
 
   .project-grid,
+  .project-grid.project-grid-compact,
   .metrics-grid,
   .project-pagination {
     grid-template-columns: 1fr;
