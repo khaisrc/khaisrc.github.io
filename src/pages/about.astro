@@ -1,0 +1,73 @@
+---
+import { BriefcaseBusiness, Download } from "@lucide/astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const experience = [
+  {
+    role: "Senior Software Engineer",
+    company: "BlinkRx",
+    period: "Mar 2022 – Jul 2026",
+    summary:
+      "Greenfield-built a prescription system of record (Python/Django, PostgreSQL, EKS) handling 59.5M API requests per month, replacing a legacy pharmacy monolith through shadow-mode migration. Also built the pharmacy transfer pipeline, the Rx deduplication compliance system, PBM insurance integrations adding 323K claims per month, LangGraph workflows for unstructured eRx notes, and 8 disaster-recovery runbooks.",
+  },
+  {
+    role: "Senior Software Engineer",
+    company: "Apartments.com",
+    period: "Aug 2019 – Mar 2022",
+    summary:
+      "Designed REST APIs and background services for resident and community messaging on Kafka-based pub/sub, and built an online tour scheduling web service integrating third-party APIs into Apartments.com product flows. Mentored associate developers and conducted technical interviews.",
+  },
+  {
+    role: "Software Development Engineer",
+    company: "QuickBridge",
+    period: "Oct 2018 – Jul 2019",
+    summary:
+      "Built a Twilio SMS solution for a loan-processing CRM with AngularJS, ASP.NET Core, and SQL Server, enabling two-way communication between loan agents and clients. Led the migration from .NET Framework to .NET Core for Linux container hosting.",
+  },
+  {
+    role: "Software Engineer",
+    company: "CU Direct",
+    period: "Jun 2015 – Sep 2018",
+    summary:
+      "Built loan-origination features and NServiceBus microservices connecting the lending system with car-dealership platforms using WPF, ASP.NET, and SQL Server.",
+  },
+];
+---
+
+<BaseLayout title="About | Khai Nguyen" description="Khai Nguyen is a California-based staff-level software engineer with 10+ years building backend platforms, distributed systems, and full-stack products.">
+  <section class="shell section" aria-labelledby="about-title">
+    <p class="eyebrow">About</p>
+    <h1 id="about-title" class="about-title">Engineering dependable systems in regulated, high-stakes domains.</h1>
+    <div class="prose">
+      <p>
+        I'm a California-based, staff-level software engineer with 10+ years of experience building
+        backend platforms, distributed workflows, and full-stack products.
+
+        My work has centered on domains where correctness matters: healthcare pharmacy systems,
+        real estate platforms, and lending infrastructure. Most recently I built a prescription
+        system of record handling roughly tens of millions of API requests per month, replacing a legacy
+        monolith without interrupting a regulated pharmacy operation.
+
+        I care about migration paths that are reversible, observability from day one, and systems
+        other engineers can safely change.
+      </p>
+    </div>
+    <div class="about-actions">
+      <a class="secondary-link" href="/khai-nguyen-resume.pdf" download><Download size={17} /> Download resume</a>
+      <a class="secondary-link" href="https://www.linkedin.com/in/khainguyen/" target="_blank" rel="noreferrer"><BriefcaseBusiness size={17} /> LinkedIn</a>
+      <a class="secondary-link" href="/case-studies/">Read the case studies</a>
+    </div>
+    <h2 class="experience-heading">Experience</h2>
+    <ol class="experience-list">
+      {experience.map((job) => (
+        <li class="experience-item">
+          <div class="experience-header">
+            <p class="experience-role">{job.role} · <span class="experience-company">{job.company}</span></p>
+            <p class="experience-period">{job.period}</p>
+          </div>
+          <p class="experience-summary">{job.summary}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+</BaseLayout>

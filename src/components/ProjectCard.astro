@@ -15,7 +15,7 @@ const filters = [data.company, ...data.areas].join("|").toLowerCase();
 <article class="project-card" data-project data-filters={filters}>
   <span class="card-number">{String(index + 1).padStart(2, "0")}</span>
   <p class="project-company">{data.company}</p>
-  <h3><a href={`/projects/${project.id}/`}>{data.title}</a></h3>
+  <h3><a href={`/case-studies/${project.id}/`}>{data.title}</a></h3>
   <p class="project-description">{data.description}</p>
   <ul class="tech-list" aria-label="Technology stack">
     {data.techStack.slice(0, 6).map((tech) => <li class="tech-item">{tech}</li>)}
@@ -30,7 +30,7 @@ const filters = [data.company, ...data.areas].join("|").toLowerCase();
       ))}
     </div>
   )}
-  <a class="card-link" href={`/projects/${project.id}/`} aria-label={`Read ${data.title} case study`}>
+  <a class="card-link" href={`/case-studies/${project.id}/`} aria-label={`Read ${data.title} case study`}>
     View case study <ArrowUpRight size={15} />
   </a>
 </article>

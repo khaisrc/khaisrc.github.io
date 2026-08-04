@@ -35,7 +35,7 @@ const description = project.data.description;
       <div class="shell">
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="/">Home</a><ChevronRight size={14} aria-hidden="true" />
-          <a href="/#projects">Projects</a><ChevronRight size={14} aria-hidden="true" />
+          <a href="/case-studies/">Case Studies</a><ChevronRight size={14} aria-hidden="true" />
           <span aria-current="page">{project.data.title}</span>
         </nav>
         <div class="project-hero-grid">
@@ -85,11 +85,11 @@ const description = project.data.description;
       <div>
         <div class="prose"><Content /></div>
         <nav class="project-pagination" aria-label="Project navigation">
-          <a class="pagination-link" href={`/projects/${previous.id}/`}>
+          <a class="pagination-link" href={`/case-studies/${previous.id}/`}>
             <span class="pagination-label">Previous project</span>
             <span class="pagination-title">{previous.data.title}</span>
           </a>
-          <a class="pagination-link" href={`/projects/${next.id}/`}>
+          <a class="pagination-link" href={`/case-studies/${next.id}/`}>
             <span class="pagination-label">Next project</span>
             <span class="pagination-title">{next.data.title}</span>
           </a>

@@ -1,12 +1,16 @@
 ---
 import { getCollection } from "astro:content";
 import { ArrowDown, BriefcaseBusiness, CodeXml, Download } from "@lucide/astro";
-import ProjectIndex from "../components/ProjectIndex.astro";
+import CaseStudies from "../components/CaseStudies.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const projects = (await getCollection("projects", ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order,
 );
+const homePicks = ["prescription-service", "disaster-recovery-framework", "erx-patient-data-agent"];
+const featured = homePicks
+  .map((id) => projects.find((project) => project.id === id))
+  .filter((project): project is (typeof projects)[number] => Boolean(project));
 ---
 
 <BaseLayout>
@@ -19,10 +23,7 @@ const projects = (await getCollection("projects", ({ data }) => !data.draft)).so
         real estate, and lending.
       </p>
       <div class="hero-actions">
-        <a class="primary-link" href="#projects">Explore projects <ArrowDown size={17} /></a>
-        <a class="secondary-link" href="/khai-nguyen-resume.pdf" download><Download size={17} /> Resume</a>
-        <a class="secondary-link" href="https://www.linkedin.com/in/khainguyen/" target="_blank" rel="noreferrer"><BriefcaseBusiness size={17} /> LinkedIn</a>
-        <a class="secondary-link" href="https://github.com/khaister" target="_blank" rel="noreferrer"><CodeXml size={17} /> GitHub</a>
+        <a class="primary-link" href="#case-studies">Explore selected case studies <ArrowDown size={17} /></a>
       </div>
     </div>
     <figure class="system-visual">
@@ -31,14 +32,5 @@ const projects = (await getCollection("projects", ({ data }) => !data.draft)).so
     </figure>
   </section>
 
-  <section class="evidence-band" aria-label="Career evidence">
-    <div class="shell evidence-grid">
-      <div class="evidence-item"><span class="evidence-value">10+ yrs</span><span class="evidence-label">software engineering experience</span></div>
-      <div class="evidence-item"><span class="evidence-value">59.5M</span><span class="evidence-label">monthly API requests on a system of record</span></div>
-      <div class="evidence-item"><span class="evidence-value">323K</span><span class="evidence-label">monthly insurance claims added through integrations</span></div>
-      <div class="evidence-item"><span class="evidence-value">8</span><span class="evidence-label">disaster recovery runbooks authored</span></div>
-    </div>
-  </section>
-
-  <ProjectIndex projects={projects} />
+  <CaseStudies projects={featured} compact showFilters={false} viewAllHref="/case-studies/" />
 </BaseLayout>
