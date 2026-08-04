@@ -4,7 +4,7 @@ import { extname, join, relative, resolve } from "node:path";
 const root = resolve(import.meta.dirname, "..");
 const mode = process.argv[2] ?? "--source";
 const textExtensions = new Set([".astro", ".css", ".html", ".js", ".json", ".md", ".mjs", ".ts", ".typ", ".xml"]);
-const sourceTargets = ["src", "resume-public.typ"];
+const sourceTargets = ["src"];
 const outputTargets = ["dist"];
 const targets = mode === "--output" ? outputTargets : sourceTargets;
 
