@@ -82,19 +82,7 @@ const description = project.data.description;
           <a href={`#${heading.slug}`}>{heading.text}</a>
         ))}
       </aside>
-      <div>
-        <div class="prose"><Content /></div>
-        <nav class="project-pagination" aria-label="Project navigation">
-          <a class="pagination-link" href={`/case-studies/${previous.id}/`}>
-            <span class="pagination-label">Previous project</span>
-            <span class="pagination-title">{previous.data.title}</span>
-          </a>
-          <a class="pagination-link" href={`/case-studies/${next.id}/`}>
-            <span class="pagination-label">Next project</span>
-            <span class="pagination-title">{next.data.title}</span>
-          </a>
-        </nav>
-      </div>
+      <div class="prose"><Content /></div>
     </div>
   </article>
 </BaseLayout>
