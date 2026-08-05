@@ -1,12 +1,12 @@
 ---
-title: "eRx Patient Data Extraction Agent"
+title: "eRx AI Agents"
 company: "BlinkRx"
 companyUrl: "https://www.blinkrx.com/"
 role: "Senior Software Engineer"
 period: "2026"
-summary: "A production AI agent that converts relevant details from unstructured electronic-prescription notes into structured workflow data."
-description: "Built and integrated the first production AI agent in BlinkRx's pharmacy-workflow domain, reducing reliance on manual interpretation of free-form notes."
-techStack: ["Python", "Django", "LLM integration", "Structured extraction", "eRx workflows", "REST APIs"]
+summary: "Two AI agents that extract patient information and classify Nurtec ODT prescriptions from unstructured electronic-prescription notes."
+description: "Built and integrated two bounded AI workflows: one extracts patient phone numbers and preferred languages, while the other classifies Nurtec ODT prescriptions as acute or preventive treatment."
+techStack: ["Python", "Django", "LangGraph", "LLM integration", "Structured extraction", "eRx workflows", "REST APIs"]
 metrics: []
 areas: ["AI", "Backend", "Healthcare", "Integrations"]
 featured: true
@@ -17,23 +17,23 @@ draft: false
 
 ## Problem
 
-Electronic prescriptions can arrive with useful patient details embedded in free-form notes. Staff had to find and interpret that text while completing an already time-sensitive data-entry workflow.
+Electronic prescriptions can contain important workflow information only in free-form notes. Staff had to interpret those notes to find patient contact preferences and, for Nurtec ODT prescriptions, determine whether the medication was intended for acute migraine treatment or preventive treatment.
 
 ## Contribution
 
-I built and deployed an AI agent that extracts relevant patient details from unstructured notes and integrated its structured output into the prescription-entry workflow.
+I built two AI agents for the prescription-entry workflow. The first extracts a patient's phone number and preferred language from incoming eRx notes. The second determines whether a Nurtec ODT prescription is intended for acute treatment or preventive treatment.
 
 ## Technical approach
 
-- Defined a narrow extraction task around specific workflow fields instead of a general-purpose assistant.
-- Connected the agent to the existing prescription intake path through an explicit service boundary.
-- Returned structured data that the surrounding application could validate and use.
-- Kept the operational workflow responsible for final handling rather than treating model output as an independent source of truth.
+- Defined bounded tasks with structured outputs instead of building general-purpose assistants.
+- Integrated the patient-information agent into the prescription-entry workflow with validation and controlled patient-service updates.
+- Built the Nurtec workflow with deterministic rules for clear note patterns and a LangGraph AI-agent fallback for ambiguous language.
+- Added staged shadow, assist, and production modes so behavior could be evaluated before downstream writes were enabled.
 
 ## Outcome
 
-The agent became the first production AI capability in BlinkRx's pharmacy-workflow domain and introduced structured extraction into an established prescription process. Accuracy and time-saved measurements were not retained in the available source material, so no quantitative claim is presented here.
+The agents introduced structured interpretation of unstructured eRx notes into an established prescription process. One turns patient contact preferences into usable workflow data; the other produces a consistent acute-versus-preventive Nurtec classification for downstream workflows. Accuracy and time-saved measurements were not retained in the available source material, so no quantitative claim is presented here.
 
 ## Engineering judgment
 
-The useful unit of AI adoption was a bounded workflow step with a clear input and output. That made the integration testable and easier to reason about than an open-ended agent with broad operational authority.
+The useful unit of AI adoption was a bounded workflow step with a clear input and output. For the Nurtec classifier, handling explicit signals deterministically and reserving the model for ambiguous notes reduced unnecessary AI calls while keeping the integration easier to test and reason about.
