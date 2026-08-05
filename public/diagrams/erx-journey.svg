@@ -1,0 +1,1934 @@
+<svg
+  id="my-svg"
+  width="2159.953125"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  class="flowchart"
+  height="1336.765625"
+  viewBox="0 0 2159.953125 1336.765625"
+  role="graphics-document document"
+  aria-roledescription="flowchart-v2"
+  aria-describedby="chart-desc-my-svg"
+  aria-labelledby="chart-title-my-svg"
+  style="background-color: transparent"
+>
+  <title id="chart-title-my-svg">
+    Electronic prescription journey from the doctor's office to medication
+    shipment
+  </title>
+  <desc id="chart-desc-my-svg">
+    A doctor creates an electronic prescription that is routed through
+    Surescripts into pharmacy intake and restricted S3 storage. One path enters
+    Prescription Service for Python regex matching; unresolved Nurtec
+    indications fall back to the AI Agent Service. The AI Agent Service accepts
+    eRx data at an API endpoint, checks for MDO notes, and when notes are
+    present runs patient-information and Nurtec-indication agents in parallel
+    before validating both outputs with guardrails and merging at an end node.
+  </desc>
+  <style>
+    #my-svg{font-family:Arial,Helvetica,sans-serif;font-size:16px;fill:#202020;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#f9f9f9;}#my-svg .error-text{fill:#060606;stroke:#060606;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#646464;stroke:#646464;}#my-svg .marker.cross{stroke:#646464;}#my-svg svg{font-family:Arial,Helvetica,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg .label{font-family:Arial,Helvetica,sans-serif;color:#202020;}#my-svg .cluster-label text{fill:#060606;}#my-svg .cluster-label span{color:#060606;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#202020;color:#202020;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#f0f0f0;stroke:#646464;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#646464!important;stroke-width:0;stroke:#646464;}#my-svg .arrowheadPath{fill:#060606;}#my-svg .edgePath .path{stroke:#646464;stroke-width:1px;}#my-svg .flowchart-link{stroke:#646464;fill:none;}#my-svg .edgeLabel{background-color:#e8e8e8;text-align:center;}#my-svg .edgeLabel p{background-color:#e8e8e8;}#my-svg .edgeLabel rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#my-svg .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#my-svg .cluster rect{fill:#ffffff;stroke:#d9d9d9;stroke-width:1px;}#my-svg .cluster text{fill:#060606;}#my-svg .cluster span{color:#060606;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Arial,Helvetica,sans-serif;font-size:12px;background:#f9f9f9;border:1px solid hsl(0, 0%, 87.6470588235%);border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#202020;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:#e8e8e8;text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:#e8e8e8;padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#646464;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].swimlane.cluster rect{filter:none;}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#646464;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg *{font-family:Arial,Helvetica,sans-serif!important;}#my-svg :root{--mermaid-font-family:Arial,Helvetica,sans-serif;}#my-svg .focus&gt;*{stroke:rgb(15, 118, 110)!important;stroke-width:3px!important;}#my-svg .focus span{stroke:rgb(15, 118, 110)!important;stroke-width:3px!important;}
+  </style>
+  <g>
+    <marker
+      id="my-svg_flowchart-v2-pointEnd"
+      class="marker flowchart-v2"
+      viewBox="0 0 10 10"
+      refX="5"
+      refY="5"
+      markerUnits="userSpaceOnUse"
+      markerWidth="8"
+      markerHeight="8"
+      orient="auto"
+    >
+      <path
+        d="M 0 0 L 10 5 L 0 10 z"
+        class="arrowMarkerPath"
+        style="stroke-width: 1; stroke-dasharray: 1, 0"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-pointStart"
+      class="marker flowchart-v2"
+      viewBox="0 0 10 10"
+      refX="4.5"
+      refY="5"
+      markerUnits="userSpaceOnUse"
+      markerWidth="8"
+      markerHeight="8"
+      orient="auto"
+    >
+      <path
+        d="M 0 5 L 10 10 L 10 0 z"
+        class="arrowMarkerPath"
+        style="stroke-width: 1; stroke-dasharray: 1, 0"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-pointEnd-margin"
+      class="marker flowchart-v2"
+      viewBox="0 0 11.5 14"
+      refX="11.5"
+      refY="7"
+      markerUnits="userSpaceOnUse"
+      markerWidth="10.5"
+      markerHeight="14"
+      orient="auto"
+    >
+      <path
+        d="M 0 0 L 11.5 7 L 0 14 z"
+        class="arrowMarkerPath"
+        style="stroke-width: 0; stroke-dasharray: 1, 0"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-pointStart-margin"
+      class="marker flowchart-v2"
+      viewBox="0 0 11.5 14"
+      refX="1"
+      refY="7"
+      markerUnits="userSpaceOnUse"
+      markerWidth="11.5"
+      markerHeight="14"
+      orient="auto"
+    >
+      <polygon
+        points="0,7 11.5,14 11.5,0"
+        class="arrowMarkerPath"
+        style="stroke-width: 0; stroke-dasharray: 1, 0"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-circleEnd"
+      class="marker flowchart-v2"
+      viewBox="0 0 10 10"
+      refX="11"
+      refY="5"
+      markerUnits="userSpaceOnUse"
+      markerWidth="11"
+      markerHeight="11"
+      orient="auto"
+    >
+      <circle
+        cx="5"
+        cy="5"
+        r="5"
+        class="arrowMarkerPath"
+        style="stroke-width: 1; stroke-dasharray: 1, 0"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-circleStart"
+      class="marker flowchart-v2"
+      viewBox="0 0 10 10"
+      refX="-1"
+      refY="5"
+      markerUnits="userSpaceOnUse"
+      markerWidth="11"
+      markerHeight="11"
+      orient="auto"
+    >
+      <circle
+        cx="5"
+        cy="5"
+        r="5"
+        class="arrowMarkerPath"
+        style="stroke-width: 1; stroke-dasharray: 1, 0"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-circleEnd-margin"
+      class="marker flowchart-v2"
+      viewBox="0 0 10 10"
+      refY="5"
+      refX="12.25"
+      markerUnits="userSpaceOnUse"
+      markerWidth="14"
+      markerHeight="14"
+      orient="auto"
+    >
+      <circle
+        cx="5"
+        cy="5"
+        r="5"
+        class="arrowMarkerPath"
+        style="stroke-width: 0; stroke-dasharray: 1, 0"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-circleStart-margin"
+      class="marker flowchart-v2"
+      viewBox="0 0 10 10"
+      refX="-2"
+      refY="5"
+      markerUnits="userSpaceOnUse"
+      markerWidth="14"
+      markerHeight="14"
+      orient="auto"
+    >
+      <circle
+        cx="5"
+        cy="5"
+        r="5"
+        class="arrowMarkerPath"
+        style="stroke-width: 0; stroke-dasharray: 1, 0"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-crossEnd"
+      class="marker cross flowchart-v2"
+      viewBox="0 0 11 11"
+      refX="12"
+      refY="5.2"
+      markerUnits="userSpaceOnUse"
+      markerWidth="11"
+      markerHeight="11"
+      orient="auto"
+    >
+      <path
+        d="M 1,1 l 9,9 M 10,1 l -9,9"
+        class="arrowMarkerPath"
+        style="stroke-width: 2; stroke-dasharray: 1, 0"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-crossStart"
+      class="marker cross flowchart-v2"
+      viewBox="0 0 11 11"
+      refX="-1"
+      refY="5.2"
+      markerUnits="userSpaceOnUse"
+      markerWidth="11"
+      markerHeight="11"
+      orient="auto"
+    >
+      <path
+        d="M 1,1 l 9,9 M 10,1 l -9,9"
+        class="arrowMarkerPath"
+        style="stroke-width: 2; stroke-dasharray: 1, 0"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-crossEnd-margin"
+      class="marker cross flowchart-v2"
+      viewBox="0 0 15 15"
+      refX="17.7"
+      refY="7.5"
+      markerUnits="userSpaceOnUse"
+      markerWidth="12"
+      markerHeight="12"
+      orient="auto"
+    >
+      <path
+        d="M 1,1 L 14,14 M 1,14 L 14,1"
+        class="arrowMarkerPath"
+        style="stroke-width: 2.5"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-crossStart-margin"
+      class="marker cross flowchart-v2"
+      viewBox="0 0 15 15"
+      refX="-3.5"
+      refY="7.5"
+      markerUnits="userSpaceOnUse"
+      markerWidth="12"
+      markerHeight="12"
+      orient="auto"
+    >
+      <path
+        d="M 1,1 L 14,14 M 1,14 L 14,1"
+        class="arrowMarkerPath"
+        style="stroke-width: 2.5; stroke-dasharray: 1, 0"
+      />
+    </marker>
+    <g class="root">
+      <g class="clusters" />
+      <g class="edgePaths">
+        <path
+          d="M1825.188,686.07L1829.354,686.07C1833.521,686.07,1841.854,686.07,1849.521,686.07C1857.188,686.07,1864.188,686.07,1867.688,686.07L1871.188,686.07"
+          id="my-svg-L_ready_fulfillmentStep_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style=""
+          data-edge="true"
+          data-et="edge"
+          data-id="L_ready_fulfillmentStep_0"
+          data-points="W3sieCI6MTgyNS4xODc1LCJ5Ijo2ODYuMDcwMzEyNX0seyJ4IjoxODUwLjE4NzUsInkiOjY4Ni4wNzAzMTI1fSx7IngiOjE4NzUuMTg3NSwieSI6Njg2LjA3MDMxMjV9XQ=="
+          data-look="classic"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+        />
+        <path
+          d="M1413.293,686.07L1407.422,686.07C1401.551,686.07,1389.809,686.07,1378.632,682.752C1367.455,679.434,1356.843,672.798,1351.537,669.48L1346.231,666.162"
+          id="my-svg-L_clear_aiEndpoint_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style=""
+          data-edge="true"
+          data-et="edge"
+          data-id="L_clear_aiEndpoint_0"
+          data-points="W3sieCI6MTQxMy4yOTI5Njg3NSwieSI6Njg2LjA3MDMxMjV9LHsieCI6MTM3OC4wNjY0MDYyNSwieSI6Njg2LjA3MDMxMjV9LHsieCI6MTM0Mi44Mzk4NDM3NSwieSI6NjY0LjA0MTA4NDA2MzM0MjN9XQ=="
+          data-look="classic"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+        />
+        <path
+          d="M1342.84,444.599L1348.711,444.341C1354.582,444.082,1366.324,443.564,1377.597,448.749C1388.869,453.933,1399.672,464.819,1405.074,470.261L1410.475,475.704"
+          id="my-svg-L_aiEnd_ready_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style=""
+          data-edge="true"
+          data-et="edge"
+          data-id="L_aiEnd_ready_0"
+          data-points="W3sieCI6MTM0Mi44Mzk4NDM3NSwieSI6NDQ0LjU5OTQzNTY0NjkwMDI1fSx7IngiOjEzNzguMDY2NDA2MjUsInkiOjQ0My4wNDY4NzV9LHsieCI6MTQxMy4yOTI5Njg3NSwieSI6NDc4LjU0MzU5NjkxNDcwNzU2fV0="
+          data-look="classic"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+        />
+        <path
+          d="M637.234,495.156L641.401,489.138C645.568,483.119,653.901,471.083,661.568,465.065C669.234,459.047,676.234,459.047,679.734,459.047L683.234,459.047"
+          id="my-svg-L_storage_aiEndpoint_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style=""
+          data-edge="true"
+          data-et="edge"
+          data-id="L_storage_aiEndpoint_0"
+          data-points="W3sieCI6NjM3LjIzNDM3NSwieSI6NDk1LjE1NTY2NDUyNTAwMzV9LHsieCI6NjYyLjIzNDM3NSwieSI6NDU5LjA0Njg3NX0seyJ4Ijo2ODcuMjM0Mzc1LCJ5Ijo0NTkuMDQ2ODc1fV0="
+          data-look="classic"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+        />
+        <path
+          d="M637.234,908.985L641.401,915.003C645.568,921.021,653.901,933.057,716.868,939.076C779.835,945.094,897.436,945.094,1016.742,945.094C1136.047,945.094,1257.057,945.094,1322.978,939.276C1388.9,933.458,1399.734,921.823,1405.15,916.005L1410.567,910.188"
+          id="my-svg-L_storage_entry_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style=""
+          data-edge="true"
+          data-et="edge"
+          data-id="L_storage_entry_0"
+          data-points="W3sieCI6NjM3LjIzNDM3NSwieSI6OTA4Ljk4NDk2MDQ3NDk5NjZ9LHsieCI6NjYyLjIzNDM3NSwieSI6OTQ1LjA5Mzc1fSx7IngiOjEwMTUuMDM3MTA5Mzc1LCJ5Ijo5NDUuMDkzNzV9LHsieCI6MTM3OC4wNjY0MDYyNSwieSI6OTQ1LjA5Mzc1fSx7IngiOjE0MTMuMjkyOTY4NzUsInkiOjkwNy4yNjAwMjA3NzI0MjY1fV0="
+          data-look="classic"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+        />
+        <path
+          d="M300.719,702.07L304.885,702.07C309.052,702.07,317.385,702.07,325.052,702.07C332.719,702.07,339.719,702.07,343.219,702.07L346.719,702.07"
+          id="my-svg-L_network_apiGateway_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style=""
+          data-edge="true"
+          data-et="edge"
+          data-id="L_network_apiGateway_0"
+          data-points="W3sieCI6MzAwLjcxODc1LCJ5Ijo3MDIuMDcwMzEyNX0seyJ4IjozMjUuNzE4NzUsInkiOjcwMi4wNzAzMTI1fSx7IngiOjM1MC43MTg3NSwieSI6NzAyLjA3MDMxMjV9XQ=="
+          data-look="classic"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+        />
+      </g>
+      <g class="edgeLabels">
+        <g class="edgeLabel">
+          <g
+            class="label"
+            data-id="L_ready_fulfillmentStep_0"
+            transform="translate(0, 0)"
+          >
+            <foreignObject width="0" height="0"
+              ><div
+                xmlns="http://www.w3.org/1999/xhtml"
+                class="labelBkg"
+                style="
+                  display: table-cell;
+                  white-space: nowrap;
+                  line-height: 1.5;
+                  max-width: 200px;
+                  text-align: center;
+                "
+              >
+                <span class="edgeLabel"></span></div
+            ></foreignObject>
+          </g>
+        </g>
+        <g class="edgeLabel" transform="translate(1378.06640625, 686.0703125)">
+          <g
+            class="label"
+            data-id="L_clear_aiEndpoint_0"
+            transform="translate(-10.2265625, -12)"
+          >
+            <foreignObject width="20.453125" height="24"
+              ><div
+                xmlns="http://www.w3.org/1999/xhtml"
+                class="labelBkg"
+                style="
+                  display: table-cell;
+                  white-space: nowrap;
+                  line-height: 1.5;
+                  max-width: 200px;
+                  text-align: center;
+                "
+              >
+                <span class="edgeLabel"><p>No</p></span>
+              </div></foreignObject
+            >
+          </g>
+        </g>
+        <g class="edgeLabel">
+          <g
+            class="label"
+            data-id="L_aiEnd_ready_0"
+            transform="translate(0, 0)"
+          >
+            <foreignObject width="0" height="0"
+              ><div
+                xmlns="http://www.w3.org/1999/xhtml"
+                class="labelBkg"
+                style="
+                  display: table-cell;
+                  white-space: nowrap;
+                  line-height: 1.5;
+                  max-width: 200px;
+                  text-align: center;
+                "
+              >
+                <span class="edgeLabel"></span></div
+            ></foreignObject>
+          </g>
+        </g>
+        <g class="edgeLabel">
+          <g
+            class="label"
+            data-id="L_storage_aiEndpoint_0"
+            transform="translate(0, 0)"
+          >
+            <foreignObject width="0" height="0"
+              ><div
+                xmlns="http://www.w3.org/1999/xhtml"
+                class="labelBkg"
+                style="
+                  display: table-cell;
+                  white-space: nowrap;
+                  line-height: 1.5;
+                  max-width: 200px;
+                  text-align: center;
+                "
+              >
+                <span class="edgeLabel"></span></div
+            ></foreignObject>
+          </g>
+        </g>
+        <g class="edgeLabel">
+          <g
+            class="label"
+            data-id="L_storage_entry_0"
+            transform="translate(0, 0)"
+          >
+            <foreignObject width="0" height="0"
+              ><div
+                xmlns="http://www.w3.org/1999/xhtml"
+                class="labelBkg"
+                style="
+                  display: table-cell;
+                  white-space: nowrap;
+                  line-height: 1.5;
+                  max-width: 200px;
+                  text-align: center;
+                "
+              >
+                <span class="edgeLabel"></span></div
+            ></foreignObject>
+          </g>
+        </g>
+        <g class="edgeLabel">
+          <g
+            class="label"
+            data-id="L_network_apiGateway_0"
+            transform="translate(0, 0)"
+          >
+            <foreignObject width="0" height="0"
+              ><div
+                xmlns="http://www.w3.org/1999/xhtml"
+                class="labelBkg"
+                style="
+                  display: table-cell;
+                  white-space: nowrap;
+                  line-height: 1.5;
+                  max-width: 200px;
+                  text-align: center;
+                "
+              >
+                <span class="edgeLabel"></span></div
+            ></foreignObject>
+          </g>
+        </g>
+      </g>
+      <g class="nodes">
+        <g class="root" transform="translate(1867.1875, 613.5703125)">
+          <g class="clusters">
+            <g class="cluster" id="my-svg-fulfillment" data-look="classic">
+              <rect style="" x="8" y="8" width="276.765625" height="129" />
+              <g class="cluster-label" transform="translate(45.1796875, 8)">
+                <foreignObject width="202.40625" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                    "
+                  >
+                    <span class="nodeLabel"><p>PHARMACY FULFILLMENT</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+          </g>
+          <g class="edgePaths" />
+          <g class="edgeLabels" />
+          <g class="nodes">
+            <g
+              class="node default"
+              id="my-svg-flowchart-fulfillmentStep-49"
+              data-look="classic"
+              transform="translate(146.3828125, 72.5)"
+            >
+              <rect
+                class="basic label-container"
+                style=""
+                x="-103.3828125"
+                y="-27"
+                width="206.765625"
+                height="54"
+              />
+              <g class="label" style="" transform="translate(-73.3828125, -12)">
+                <rect />
+                <foreignObject width="146.765625" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"
+                      ><p>Package &amp; ship to pt</p></span
+                    >
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+          </g>
+        </g>
+        <g class="root" transform="translate(679.234375, 0)">
+          <g class="clusters">
+            <g class="cluster" id="my-svg-aiService" data-look="classic">
+              <rect
+                style=""
+                x="8"
+                y="8"
+                width="655.60546875"
+                height="902.09375"
+              />
+              <g class="cluster-label" transform="translate(261.849609375, 8)">
+                <foreignObject width="147.90625" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                    "
+                  >
+                    <span class="nodeLabel"><p>AI AGENT SERVICE</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+          </g>
+          <g class="edgePaths">
+            <path
+              d="M216.34,123.5L216.34,129.75C216.34,136,216.34,148.5,216.34,160.333C216.34,172.167,216.34,183.333,216.34,188.917L216.34,194.5"
+              id="my-svg-L_aiEndpoint_hasMdoNotes_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_aiEndpoint_hasMdoNotes_0"
+              data-points="W3sieCI6MjE2LjMzOTg0Mzc1LCJ5IjoxMjMuNX0seyJ4IjoyMTYuMzM5ODQzNzUsInkiOjE2MX0seyJ4IjoyMTYuMzM5ODQzNzUsInkiOjE5OC41fV0="
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+            <path
+              d="M216.34,400.125L216.34,408.375C216.34,416.625,216.34,433.125,216.34,448.958C216.34,464.792,216.34,479.958,216.34,487.542L216.34,495.125"
+              id="my-svg-L_hasMdoNotes_patientAgent_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_hasMdoNotes_patientAgent_0"
+              data-points="W3sieCI6MjE2LjMzOTg0Mzc1LCJ5Ijo0MDAuMTI1fSx7IngiOjIxNi4zMzk4NDM3NSwieSI6NDQ5LjYyNX0seyJ4IjoyMTYuMzM5ODQzNzUsInkiOjQ5OS4xMjV9XQ=="
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+            <path
+              d="M282.869,333.596L320.395,352.934C357.922,372.272,432.974,410.949,470.501,437.87C508.027,464.792,508.027,479.958,508.027,487.542L508.027,495.125"
+              id="my-svg-L_hasMdoNotes_indicationAgent_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_hasMdoNotes_indicationAgent_0"
+              data-points="W3sieCI6MjgyLjg2ODY4MTA2NjE3NjQ2LCJ5IjozMzMuNTk2MTYyNjgzODIzNTR9LHsieCI6NTA4LjAyNzM0Mzc1LCJ5Ijo0NDkuNjI1fSx7IngiOjUwOC4wMjczNDM3NSwieSI6NDk5LjEyNX1d"
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+            <path
+              d="M163.607,347.392L144.919,364.431C126.232,381.47,88.856,415.547,70.168,447.336C51.48,479.125,51.48,508.625,51.48,538.125C51.48,567.625,51.48,597.125,51.48,626.625C51.48,656.125,51.48,685.625,51.48,713.125C51.48,740.625,51.48,766.125,81.427,787.554C111.374,808.982,171.268,826.339,201.215,835.018L231.162,843.696"
+              id="my-svg-L_hasMdoNotes_aiEnd_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_hasMdoNotes_aiEnd_0"
+              data-points="W3sieCI6MTYzLjYwNzA3NDU1MTY0NTkyLCJ5IjozNDcuMzkyMjMwODAxNjQ1OTV9LHsieCI6NTEuNDgwNDY4NzUsInkiOjQ0OS42MjV9LHsieCI6NTEuNDgwNDY4NzUsInkiOjUzOC4xMjV9LHsieCI6NTEuNDgwNDY4NzUsInkiOjYyNi42MjV9LHsieCI6NTEuNDgwNDY4NzUsInkiOjcxNS4xMjV9LHsieCI6NTEuNDgwNDY4NzUsInkiOjc5MS42MjV9LHsieCI6MjM1LjAwMzQ1NDcxNTM2NDk3LCJ5Ijo4NDQuODA5Njk4OTg2NzEzOX1d"
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+            <path
+              d="M216.34,577.125L216.34,585.375C216.34,593.625,216.34,610.125,216.34,625.958C216.34,641.792,216.34,656.958,216.34,664.542L216.34,672.125"
+              id="my-svg-L_patientAgent_patientGuard_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_patientAgent_patientGuard_0"
+              data-points="W3sieCI6MjE2LjMzOTg0Mzc1LCJ5Ijo1NzcuMTI1fSx7IngiOjIxNi4zMzk4NDM3NSwieSI6NjI2LjYyNX0seyJ4IjoyMTYuMzM5ODQzNzUsInkiOjY3Ni4xMjV9XQ=="
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+            <path
+              d="M216.34,754.125L216.34,760.375C216.34,766.625,216.34,779.125,220.548,791.68C224.757,804.235,233.174,816.845,237.383,823.15L241.592,829.455"
+              id="my-svg-L_patientGuard_aiEnd_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_patientGuard_aiEnd_0"
+              data-points="W3sieCI6MjE2LjMzOTg0Mzc1LCJ5Ijo3NTQuMTI1fSx7IngiOjIxNi4zMzk4NDM3NSwieSI6NzkxLjYyNX0seyJ4IjoyNDMuODEyMzkyMzE5NjgwMzgsInkiOjgzMi43ODIyNTQxNTA0MjgxfV0="
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+            <path
+              d="M508.027,577.125L508.027,585.375C508.027,593.625,508.027,610.125,508.027,625.958C508.027,641.792,508.027,656.958,508.027,664.542L508.027,672.125"
+              id="my-svg-L_indicationAgent_indicationGuard_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_indicationAgent_indicationGuard_0"
+              data-points="W3sieCI6NTA4LjAyNzM0Mzc1LCJ5Ijo1NzcuMTI1fSx7IngiOjUwOC4wMjczNDM3NSwieSI6NjI2LjYyNX0seyJ4Ijo1MDguMDI3MzQzNzUsInkiOjY3Ni4xMjV9XQ=="
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+            <path
+              d="M508.027,754.125L508.027,760.375C508.027,766.625,508.027,779.125,470.178,794.267C432.329,809.408,356.63,827.191,318.781,836.083L280.931,844.974"
+              id="my-svg-L_indicationGuard_aiEnd_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_indicationGuard_aiEnd_0"
+              data-points="W3sieCI6NTA4LjAyNzM0Mzc1LCJ5Ijo3NTQuMTI1fSx7IngiOjUwOC4wMjczNDM3NSwieSI6NzkxLjYyNX0seyJ4IjoyNzcuMDM3Mjg5NzgxMTA5MzQsInkiOjg0NS44ODg4NzU3MzAxOTc3fV0="
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+          </g>
+          <g class="edgeLabels">
+            <g class="edgeLabel">
+              <g
+                class="label"
+                data-id="L_aiEndpoint_hasMdoNotes_0"
+                transform="translate(0, 0)"
+              >
+                <foreignObject width="0" height="0"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"></span></div
+                ></foreignObject>
+              </g>
+            </g>
+            <g class="edgeLabel" transform="translate(216.33984375, 449.625)">
+              <g
+                class="label"
+                data-id="L_hasMdoNotes_patientAgent_0"
+                transform="translate(-13.0546875, -12)"
+              >
+                <foreignObject width="26.109375" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"><p>Yes</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g class="edgeLabel" transform="translate(508.02734375, 449.625)">
+              <g
+                class="label"
+                data-id="L_hasMdoNotes_indicationAgent_0"
+                transform="translate(-13.0546875, -12)"
+              >
+                <foreignObject width="26.109375" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"><p>Yes</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g class="edgeLabel" transform="translate(51.48046875, 626.625)">
+              <g
+                class="label"
+                data-id="L_hasMdoNotes_aiEnd_0"
+                transform="translate(-10.2265625, -12)"
+              >
+                <foreignObject width="20.453125" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"><p>No</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g class="edgeLabel">
+              <g
+                class="label"
+                data-id="L_patientAgent_patientGuard_0"
+                transform="translate(0, 0)"
+              >
+                <foreignObject width="0" height="0"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"></span></div
+                ></foreignObject>
+              </g>
+            </g>
+            <g class="edgeLabel">
+              <g
+                class="label"
+                data-id="L_patientGuard_aiEnd_0"
+                transform="translate(0, 0)"
+              >
+                <foreignObject width="0" height="0"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"></span></div
+                ></foreignObject>
+              </g>
+            </g>
+            <g class="edgeLabel">
+              <g
+                class="label"
+                data-id="L_indicationAgent_indicationGuard_0"
+                transform="translate(0, 0)"
+              >
+                <foreignObject width="0" height="0"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"></span></div
+                ></foreignObject>
+              </g>
+            </g>
+            <g class="edgeLabel">
+              <g
+                class="label"
+                data-id="L_indicationGuard_aiEnd_0"
+                transform="translate(0, 0)"
+              >
+                <foreignObject width="0" height="0"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"></span></div
+                ></foreignObject>
+              </g>
+            </g>
+          </g>
+          <g class="nodes">
+            <g
+              class="node default focus"
+              id="my-svg-flowchart-aiEndpoint-28"
+              data-look="classic"
+              transform="translate(216.33984375, 84.5)"
+            >
+              <rect
+                class="basic label-container"
+                style="stroke: #0f766e !important; stroke-width: 3px !important"
+                x="-92.703125"
+                y="-39"
+                width="185.40625"
+                height="78"
+              />
+              <g class="label" style="" transform="translate(-62.703125, -24)">
+                <rect />
+                <foreignObject width="125.40625" height="48"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"
+                      ><p>API endpoint<br />Accepts eRx data</p></span
+                    >
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default focus"
+              id="my-svg-flowchart-hasMdoNotes-29"
+              data-look="classic"
+              transform="translate(216.33984375, 299.3125)"
+            >
+              <polygon
+                points="100.8125,0 201.625,-100.8125 100.8125,-201.625 0,-100.8125"
+                class="label-container"
+                transform="translate(-100.3125, 100.8125)"
+                style="stroke: #0f766e !important; stroke-width: 3px !important"
+              />
+              <g class="label" style="" transform="translate(-73.8125, -12)">
+                <rect />
+                <foreignObject width="147.625" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"><p>MDO notes present?</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default focus"
+              id="my-svg-flowchart-patientAgent-30"
+              data-look="classic"
+              transform="translate(216.33984375, 538.125)"
+            >
+              <rect
+                class="basic label-container"
+                style="stroke: #0f766e !important; stroke-width: 3px !important"
+                x="-129.859375"
+                y="-39"
+                width="259.71875"
+                height="78"
+              />
+              <g class="label" style="" transform="translate(-99.859375, -24)">
+                <rect />
+                <foreignObject width="199.71875" height="48"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"
+                      ><p>
+                        Patient information agent<br />Phone + preferred
+                        language
+                      </p></span
+                    >
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default focus"
+              id="my-svg-flowchart-indicationAgent-32"
+              data-look="classic"
+              transform="translate(508.02734375, 538.125)"
+            >
+              <rect
+                class="basic label-container"
+                style="stroke: #0f766e !important; stroke-width: 3px !important"
+                x="-111.828125"
+                y="-39"
+                width="223.65625"
+                height="78"
+              />
+              <g class="label" style="" transform="translate(-81.828125, -24)">
+                <rect />
+                <foreignObject width="163.65625" height="48"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"
+                      ><p>
+                        Nurtec indication agent<br />Acute vs preventive
+                      </p></span
+                    >
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default focus"
+              id="my-svg-flowchart-aiEnd-34"
+              data-look="classic"
+              transform="translate(255.87890625, 850.859375)"
+            >
+              <circle
+                class="basic label-container"
+                style="stroke: #0f766e !important; stroke-width: 3px !important"
+                r="21.734375"
+                cx="0"
+                cy="0"
+              />
+              <g class="label" style="" transform="translate(-14.234375, -12)">
+                <rect />
+                <foreignObject width="28.46875" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"><p>End</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default focus"
+              id="my-svg-flowchart-patientGuard-31"
+              data-look="classic"
+              transform="translate(216.33984375, 715.125)"
+            >
+              <rect
+                class="basic label-container"
+                style="stroke: #0f766e !important; stroke-width: 3px !important"
+                x="-120.578125"
+                y="-39"
+                width="241.15625"
+                height="78"
+              />
+              <g class="label" style="" transform="translate(-90.578125, -24)">
+                <rect />
+                <foreignObject width="181.15625" height="48"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"
+                      ><p>
+                        Patient guardrails<br />Validate structured output
+                      </p></span
+                    >
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default focus"
+              id="my-svg-flowchart-indicationGuard-33"
+              data-look="classic"
+              transform="translate(508.02734375, 715.125)"
+            >
+              <rect
+                class="basic label-container"
+                style="stroke: #0f766e !important; stroke-width: 3px !important"
+                x="-120.578125"
+                y="-39"
+                width="241.15625"
+                height="78"
+              />
+              <g class="label" style="" transform="translate(-90.578125, -24)">
+                <rect />
+                <foreignObject width="181.15625" height="48"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"
+                      ><p>
+                        Indication guardrails<br />Validate structured output
+                      </p></span
+                    >
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+          </g>
+        </g>
+        <g class="root" transform="translate(1405.29296875, 35.375)">
+          <g class="clusters">
+            <g class="cluster" id="my-svg-prescription" data-look="classic">
+              <rect
+                style=""
+                x="8"
+                y="8"
+                width="411.89453125"
+                height="1285.390625"
+              />
+              <g class="cluster-label" transform="translate(116.736328125, 8)">
+                <foreignObject width="194.421875" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                    "
+                  >
+                    <span class="nodeLabel"><p>PRESCRIPTION SERVICE</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+          </g>
+          <g class="edgePaths">
+            <path
+              d="M179.465,123.5L179.465,129.75C179.465,136,179.465,148.5,179.465,160.333C179.465,172.167,179.465,183.333,179.465,188.917L179.465,194.5"
+              id="my-svg-L_entry_applicable_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_entry_applicable_0"
+              data-points="W3sieCI6MTc5LjQ2NDg0Mzc1LCJ5IjoxMjMuNX0seyJ4IjoxNzkuNDY0ODQzNzUsInkiOjE2MX0seyJ4IjoxNzkuNDY0ODQzNzUsInkiOjE5OC41fV0="
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+            <path
+              d="M214.357,367.014L221.702,381.08C229.048,395.145,243.739,423.276,251.084,444.924C258.43,466.573,258.43,481.74,258.43,489.323L258.43,496.906"
+              id="my-svg-L_applicable_nurtec_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_applicable_nurtec_0"
+              data-points="W3sieCI6MjE0LjM1NjYyOTE2Mjc0MjA1LCJ5IjozNjcuMDE0NDY0NTg3MjU3OX0seyJ4IjoyNTguNDI5Njg3NSwieSI6NDUxLjQwNjI1fSx7IngiOjI1OC40Mjk2ODc1LCJ5Ijo1MDAuOTA2MjV9XQ=="
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+            <path
+              d="M258.43,554.906L258.43,561.156C258.43,567.406,258.43,579.906,258.43,591.74C258.43,603.573,258.43,614.74,258.43,620.323L258.43,625.906"
+              id="my-svg-L_nurtec_clear_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_nurtec_clear_0"
+              data-points="W3sieCI6MjU4LjQyOTY4NzUsInkiOjU1NC45MDYyNX0seyJ4IjoyNTguNDI5Njg3NSwieSI6NTkyLjQwNjI1fSx7IngiOjI1OC40Mjk2ODc1LCJ5Ijo2MjkuOTA2MjV9XQ=="
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+            <path
+              d="M144.573,367.014L137.228,381.08C129.882,395.145,115.191,423.276,107.846,450.091C100.5,476.906,100.5,502.406,100.5,525.906C100.5,549.406,100.5,570.906,100.5,603.822C100.5,636.737,100.5,681.068,100.5,727.398C100.5,773.729,100.5,822.06,100.5,858.975C100.5,895.891,100.5,921.391,100.5,944.891C100.5,968.391,100.5,989.891,100.5,1011.391C100.5,1032.891,100.5,1054.391,100.5,1075.891C100.5,1097.391,100.5,1118.891,106.473,1135.427C112.445,1151.963,124.39,1163.535,130.363,1169.321L136.335,1175.107"
+              id="my-svg-L_applicable_ready_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_applicable_ready_0"
+              data-points="W3sieCI6MTQ0LjU3MzA1ODMzNzI1Nzk1LCJ5IjozNjcuMDE0NDY0NTg3MjU3OX0seyJ4IjoxMDAuNSwieSI6NDUxLjQwNjI1fSx7IngiOjEwMC41LCJ5Ijo1MjcuOTA2MjV9LHsieCI6MTAwLjUsInkiOjU5Mi40MDYyNX0seyJ4IjoxMDAuNSwieSI6NzI1LjM5ODQzNzV9LHsieCI6MTAwLjUsInkiOjg3MC4zOTA2MjV9LHsieCI6MTAwLjUsInkiOjk0Ni44OTA2MjV9LHsieCI6MTAwLjUsInkiOjEwMTEuMzkwNjI1fSx7IngiOjEwMC41LCJ5IjoxMDc1Ljg5MDYyNX0seyJ4IjoxMDAuNSwieSI6MTE0MC4zOTA2MjV9LHsieCI6MTM5LjIwODI1Njc0MDE5NjA4LCJ5IjoxMTc3Ljg5MDYyNX1d"
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+            <path
+              d="M258.43,820.891L258.43,829.141C258.43,837.391,258.43,853.891,258.43,869.724C258.43,885.557,258.43,900.724,258.43,908.307L258.43,915.891"
+              id="my-svg-L_clear_rules_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_clear_rules_0"
+              data-points="W3sieCI6MjU4LjQyOTY4NzUsInkiOjgyMC44OTA2MjV9LHsieCI6MjU4LjQyOTY4NzUsInkiOjg3MC4zOTA2MjV9LHsieCI6MjU4LjQyOTY4NzUsInkiOjkxOS44OTA2MjV9XQ=="
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+            <path
+              d="M258.43,973.891L258.43,980.141C258.43,986.391,258.43,998.891,258.43,1010.724C258.43,1022.557,258.43,1033.724,258.43,1039.307L258.43,1044.891"
+              id="my-svg-L_rules_indication_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_rules_indication_0"
+              data-points="W3sieCI6MjU4LjQyOTY4NzUsInkiOjk3My44OTA2MjV9LHsieCI6MjU4LjQyOTY4NzUsInkiOjEwMTEuMzkwNjI1fSx7IngiOjI1OC40Mjk2ODc1LCJ5IjoxMDQ4Ljg5MDYyNX1d"
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+            <path
+              d="M258.43,1102.891L258.43,1109.141C258.43,1115.391,258.43,1127.891,252.457,1139.927C246.485,1151.963,234.539,1163.535,228.567,1169.321L222.594,1175.107"
+              id="my-svg-L_indication_ready_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_indication_ready_0"
+              data-points="W3sieCI6MjU4LjQyOTY4NzUsInkiOjExMDIuODkwNjI1fSx7IngiOjI1OC40Mjk2ODc1LCJ5IjoxMTQwLjM5MDYyNX0seyJ4IjoyMTkuNzIxNDMwNzU5ODAzOTIsInkiOjExNzcuODkwNjI1fV0="
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+          </g>
+          <g class="edgeLabels">
+            <g class="edgeLabel">
+              <g
+                class="label"
+                data-id="L_entry_applicable_0"
+                transform="translate(0, 0)"
+              >
+                <foreignObject width="0" height="0"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"></span></div
+                ></foreignObject>
+              </g>
+            </g>
+            <g class="edgeLabel" transform="translate(258.4296875, 451.40625)">
+              <g
+                class="label"
+                data-id="L_applicable_nurtec_0"
+                transform="translate(-42.671875, -12)"
+              >
+                <foreignObject width="85.34375" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"><p>Nurtec ODT</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g class="edgeLabel">
+              <g
+                class="label"
+                data-id="L_nurtec_clear_0"
+                transform="translate(0, 0)"
+              >
+                <foreignObject width="0" height="0"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"></span></div
+                ></foreignObject>
+              </g>
+            </g>
+            <g class="edgeLabel">
+              <g
+                class="label"
+                data-id="L_applicable_ready_0"
+                transform="translate(0, 0)"
+              >
+                <foreignObject width="0" height="0"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"></span></div
+                ></foreignObject>
+              </g>
+            </g>
+            <g class="edgeLabel" transform="translate(258.4296875, 870.390625)">
+              <g
+                class="label"
+                data-id="L_clear_rules_0"
+                transform="translate(-13.0546875, -12)"
+              >
+                <foreignObject width="26.109375" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"><p>Yes</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g class="edgeLabel">
+              <g
+                class="label"
+                data-id="L_rules_indication_0"
+                transform="translate(0, 0)"
+              >
+                <foreignObject width="0" height="0"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"></span></div
+                ></foreignObject>
+              </g>
+            </g>
+            <g class="edgeLabel">
+              <g
+                class="label"
+                data-id="L_indication_ready_0"
+                transform="translate(0, 0)"
+              >
+                <foreignObject width="0" height="0"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"></span></div
+                ></foreignObject>
+              </g>
+            </g>
+          </g>
+          <g class="nodes">
+            <g
+              class="node default"
+              id="my-svg-flowchart-entry-10"
+              data-look="classic"
+              transform="translate(179.46484375, 84.5)"
+            >
+              <rect
+                class="basic label-container"
+                style=""
+                x="-113.1640625"
+                y="-39"
+                width="226.328125"
+                height="78"
+              />
+              <g class="label" style="" transform="translate(-83.1640625, -24)">
+                <rect />
+                <foreignObject width="166.328125" height="48"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"
+                      ><p>
+                        Prescription entry<br />Parses fields and notes
+                      </p></span
+                    >
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default"
+              id="my-svg-flowchart-applicable-11"
+              data-look="classic"
+              transform="translate(179.46484375, 300.203125)"
+            >
+              <polygon
+                points="101.703125,0 203.40625,-101.703125 101.703125,-203.40625 0,-101.703125"
+                class="label-container"
+                transform="translate(-101.203125, 101.703125)"
+              />
+              <g class="label" style="" transform="translate(-74.703125, -12)">
+                <rect />
+                <foreignObject width="149.40625" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"><p>Applicable workflow?</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default focus"
+              id="my-svg-flowchart-nurtec-12"
+              data-look="classic"
+              transform="translate(258.4296875, 527.90625)"
+            >
+              <rect
+                class="basic label-container"
+                style="stroke: #0f766e !important; stroke-width: 3px !important"
+                x="-122.9296875"
+                y="-27"
+                width="245.859375"
+                height="54"
+              />
+              <g class="label" style="" transform="translate(-92.9296875, -12)">
+                <rect />
+                <foreignObject width="185.859375" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"
+                      ><p>Nurtec indication workflow</p></span
+                    >
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default focus"
+              id="my-svg-flowchart-clear-13"
+              data-look="classic"
+              transform="translate(258.4296875, 725.3984375)"
+            >
+              <polygon
+                points="95.4921875,0 190.984375,-95.4921875 95.4921875,-190.984375 0,-95.4921875"
+                class="label-container"
+                transform="translate(-94.9921875, 95.4921875)"
+                style="stroke: #0f766e !important; stroke-width: 3px !important"
+              />
+              <g class="label" style="" transform="translate(-68.4921875, -12)">
+                <rect />
+                <foreignObject width="136.984375" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"><p>Clear note pattern?</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default"
+              id="my-svg-flowchart-ready-16"
+              data-look="classic"
+              transform="translate(179.46484375, 1216.890625)"
+            >
+              <rect
+                class="basic label-container"
+                style=""
+                x="-130"
+                y="-39"
+                width="260"
+                height="78"
+              />
+              <g class="label" style="" transform="translate(-100, -24)">
+                <rect />
+                <foreignObject width="200" height="48"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table;
+                      white-space: break-spaces;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                      width: 200px;
+                    "
+                  >
+                    <span class="nodeLabel"
+                      ><p>Prescription ready for fulfillment</p></span
+                    >
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default focus"
+              id="my-svg-flowchart-rules-14"
+              data-look="classic"
+              transform="translate(258.4296875, 946.890625)"
+            >
+              <rect
+                class="basic label-container"
+                style="stroke: #0f766e !important; stroke-width: 3px !important"
+                x="-111.828125"
+                y="-27"
+                width="223.65625"
+                height="54"
+              />
+              <g class="label" style="" transform="translate(-81.828125, -12)">
+                <rect />
+                <foreignObject width="163.65625" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"><p>Python regex matching</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default focus"
+              id="my-svg-flowchart-indication-15"
+              data-look="classic"
+              transform="translate(258.4296875, 1075.890625)"
+            >
+              <rect
+                class="basic label-container"
+                style="stroke: #0f766e !important; stroke-width: 3px !important"
+                x="-98.9296875"
+                y="-27"
+                width="197.859375"
+                height="54"
+              />
+              <g class="label" style="" transform="translate(-68.9296875, -12)">
+                <rect />
+                <foreignObject width="137.859375" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"><p>Acute or preventive</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+          </g>
+        </g>
+        <g class="root" transform="translate(342.71875, 451.4945983886719)">
+          <g class="clusters">
+            <g class="cluster" id="my-svg-intake" data-look="classic">
+              <rect
+                style=""
+                x="8"
+                y="8"
+                width="286.515625"
+                height="485.1514205932617"
+              />
+              <g class="cluster-label" transform="translate(75.5390625, 8)">
+                <foreignObject width="151.4375" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                    "
+                  >
+                    <span class="nodeLabel"><p>PHARMACY INTAKE</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+          </g>
+          <g class="edgePaths">
+            <path
+              d="M151.258,123.5L151.258,129.75C151.258,136,151.258,148.5,151.258,160.333C151.258,172.167,151.258,183.333,151.258,188.917L151.258,194.5"
+              id="my-svg-L_apiGateway_lambda_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_apiGateway_lambda_0"
+              data-points="W3sieCI6MTUxLjI1NzgxMjUsInkiOjEyMy41fSx7IngiOjE1MS4yNTc4MTI1LCJ5IjoxNjF9LHsieCI6MTUxLjI1NzgxMjUsInkiOjE5OC41fV0="
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+            <path
+              d="M151.258,276.5L151.258,282.75C151.258,289,151.258,301.5,151.258,313.333C151.258,325.167,151.258,336.333,151.258,341.917L151.258,347.5"
+              id="my-svg-L_lambda_storage_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_lambda_storage_0"
+              data-points="W3sieCI6MTUxLjI1NzgxMjUsInkiOjI3Ni41fSx7IngiOjE1MS4yNTc4MTI1LCJ5IjozMTR9LHsieCI6MTUxLjI1NzgxMjUsInkiOjM1MS41fV0="
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+          </g>
+          <g class="edgeLabels">
+            <g class="edgeLabel">
+              <g
+                class="label"
+                data-id="L_apiGateway_lambda_0"
+                transform="translate(0, 0)"
+              >
+                <foreignObject width="0" height="0"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"></span></div
+                ></foreignObject>
+              </g>
+            </g>
+            <g class="edgeLabel">
+              <g
+                class="label"
+                data-id="L_lambda_storage_0"
+                transform="translate(0, 0)"
+              >
+                <foreignObject width="0" height="0"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"></span></div
+                ></foreignObject>
+              </g>
+            </g>
+          </g>
+          <g class="nodes">
+            <g
+              class="node default"
+              id="my-svg-flowchart-apiGateway-4"
+              data-look="classic"
+              transform="translate(151.2578125, 84.5)"
+            >
+              <rect
+                class="basic label-container"
+                style=""
+                x="-108.2578125"
+                y="-39"
+                width="216.515625"
+                height="78"
+              />
+              <g class="label" style="" transform="translate(-78.2578125, -24)">
+                <rect />
+                <foreignObject width="156.515625" height="48"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"
+                      ><p>API Gateway<br />Receives eRx request</p></span
+                    >
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default"
+              id="my-svg-flowchart-lambda-5"
+              data-look="classic"
+              transform="translate(151.2578125, 237.5)"
+            >
+              <rect
+                class="basic label-container"
+                style=""
+                x="-93.578125"
+                y="-39"
+                width="187.15625"
+                height="78"
+              />
+              <g class="label" style="" transform="translate(-63.578125, -24)">
+                <rect />
+                <foreignObject width="127.15625" height="48"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"
+                      ><p>AWS Lambda<br />Accepts eRx XML</p></span
+                    >
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default"
+              id="my-svg-flowchart-storage-6"
+              data-look="classic"
+              transform="translate(151.2578125, 403.57571029663086)"
+            >
+              <path
+                d="M0,13.717138666365791 a75.984375,13.717138666365791 0,0,0 151.96875,0 a75.984375,13.717138666365791 0,0,0 -151.96875,0 l0,76.7171386663658 a75.984375,13.717138666365791 0,0,0 151.96875,0 l0,-76.7171386663658"
+                class="basic label-container outer-path"
+                style=""
+                transform="translate(-75.984375, -52.07570799954869)"
+              />
+              <g class="label" style="" transform="translate(-68.484375, -14)">
+                <rect />
+                <foreignObject width="136.96875" height="48"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"
+                      ><p>Restricted S3<br />Stores raw payload</p></span
+                    >
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+          </g>
+        </g>
+        <g class="root" transform="translate(0, 541.0703125)">
+          <g class="clusters">
+            <g class="cluster" id="my-svg-upstream" data-look="classic">
+              <rect style="" x="8" y="8" width="292.71875" height="306" />
+              <g class="cluster-label" transform="translate(54.4921875, 8)">
+                <foreignObject width="199.734375" height="24"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                    "
+                  >
+                    <span class="nodeLabel"><p>PRESCRIPTION CREATED</p></span>
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+          </g>
+          <g class="edgePaths">
+            <path
+              d="M154.359,123.5L154.359,129.75C154.359,136,154.359,148.5,154.359,160.333C154.359,172.167,154.359,183.333,154.359,188.917L154.359,194.5"
+              id="my-svg-L_doctor_network_0"
+              class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+              style=""
+              data-edge="true"
+              data-et="edge"
+              data-id="L_doctor_network_0"
+              data-points="W3sieCI6MTU0LjM1OTM3NSwieSI6MTIzLjV9LHsieCI6MTU0LjM1OTM3NSwieSI6MTYxfSx7IngiOjE1NC4zNTkzNzUsInkiOjE5OC41fV0="
+              data-look="classic"
+              marker-end="url(#my-svg_flowchart-v2-pointEnd)"
+            />
+          </g>
+          <g class="edgeLabels">
+            <g class="edgeLabel">
+              <g
+                class="label"
+                data-id="L_doctor_network_0"
+                transform="translate(0, 0)"
+              >
+                <foreignObject width="0" height="0"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    class="labelBkg"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="edgeLabel"></span></div
+                ></foreignObject>
+              </g>
+            </g>
+          </g>
+          <g class="nodes">
+            <g
+              class="node default"
+              id="my-svg-flowchart-doctor-0"
+              data-look="classic"
+              transform="translate(154.359375, 84.5)"
+            >
+              <rect
+                class="basic label-container"
+                style=""
+                x="-111.359375"
+                y="-39"
+                width="222.71875"
+                height="78"
+              />
+              <g class="label" style="" transform="translate(-81.359375, -24)">
+                <rect />
+                <foreignObject width="162.71875" height="48"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"
+                      ><p>Doctor's office<br />Prescriber creates eRx</p></span
+                    >
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+            <g
+              class="node default"
+              id="my-svg-flowchart-network-1"
+              data-look="classic"
+              transform="translate(154.359375, 237.5)"
+            >
+              <rect
+                class="basic label-container"
+                style=""
+                x="-106.484375"
+                y="-39"
+                width="212.96875"
+                height="78"
+              />
+              <g class="label" style="" transform="translate(-76.484375, -24)">
+                <rect />
+                <foreignObject width="152.96875" height="48"
+                  ><div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style="
+                      display: table-cell;
+                      white-space: nowrap;
+                      line-height: 1.5;
+                      max-width: 200px;
+                      text-align: center;
+                    "
+                  >
+                    <span class="nodeLabel"
+                      ><p>Surescripts<br />Routes eRx message</p></span
+                    >
+                  </div></foreignObject
+                >
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+  <defs>
+    <filter id="my-svg-drop-shadow" height="130%" width="130%">
+      <feDropShadow
+        dx="4"
+        dy="4"
+        stdDeviation="0"
+        flood-opacity="0.06"
+        flood-color="#000000"
+      />
+    </filter>
+  </defs>
+  <defs>
+    <filter id="my-svg-drop-shadow-small" height="150%" width="150%">
+      <feDropShadow
+        dx="2"
+        dy="2"
+        stdDeviation="0"
+        flood-opacity="0.06"
+        flood-color="#000000"
+      />
+    </filter>
+  </defs>
+  <linearGradient
+    id="my-svg-gradient"
+    gradientUnits="objectBoundingBox"
+    x1="0%"
+    y1="0%"
+    x2="100%"
+    y2="0%"
+  >
+    <stop offset="0%" stop-color="#646464" stop-opacity="1" />
+    <stop
+      offset="100%"
+      stop-color="hsl(0, 0%, 80.9803921569%)"
+      stop-opacity="1"
+    />
+  </linearGradient>
+</svg>

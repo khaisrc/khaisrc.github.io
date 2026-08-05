@@ -1,0 +1,88 @@
+---
+config:
+  theme: base
+  fontFamily: "Arial, Helvetica, sans-serif"
+  themeCSS: "* { font-family: Arial, Helvetica, sans-serif !important; }"
+  flowchart:
+    curve: basis
+    htmlLabels: true
+    useMaxWidth: false
+  themeVariables:
+    background: "#f9f9f9"
+    fontFamily: "Arial, Helvetica, sans-serif"
+    primaryColor: "#f0f0f0"
+    primaryTextColor: "#202020"
+    primaryBorderColor: "#646464"
+    lineColor: "#646464"
+    secondaryColor: "#e8e8e8"
+    tertiaryColor: "#f9f9f9"
+    clusterBkg: "#ffffff"
+    clusterBorder: "#d9d9d9"
+---
+flowchart LR
+  accTitle: Electronic prescription journey from the doctor's office to medication shipment
+  accDescr: A doctor creates an electronic prescription that is routed through Surescripts into pharmacy intake and restricted S3 storage. One path enters Prescription Service for Python regex matching; unresolved Nurtec indications fall back to the AI Agent Service. The AI Agent Service accepts eRx data at an API endpoint, checks for MDO notes, and when notes are present runs patient-information and Nurtec-indication agents in parallel before validating both outputs with guardrails and merging at an end node.
+
+  subgraph upstream["PRESCRIPTION CREATED"]
+    direction TB
+    doctor["Doctor's office<br/>Prescriber creates eRx"]
+    network["Surescripts<br/>Routes eRx message"]
+    doctor --> network
+  end
+
+  subgraph intake["PHARMACY INTAKE"]
+    direction TB
+    apiGateway["API Gateway<br/>Receives eRx request"]
+    lambda["AWS Lambda<br/>Accepts eRx XML"]
+    storage[("Restricted S3<br/>Stores raw payload")]
+    apiGateway --> lambda --> storage
+  end
+
+  subgraph prescription["PRESCRIPTION SERVICE"]
+    direction TB
+    entry["Prescription entry<br/>Parses fields and notes"]
+    applicable{"Applicable workflow?"}
+    nurtec["Nurtec indication workflow"]
+    clear{"Clear note pattern?"}
+    rules["Python regex matching"]
+    indication["Acute or preventive"]
+    ready["Prescription ready for fulfillment"]
+
+    entry --> applicable
+    applicable -->|Nurtec ODT| nurtec --> clear
+    applicable --> ready
+    clear -->|Yes| rules --> indication --> ready
+  end
+
+  subgraph aiService["AI AGENT SERVICE"]
+    direction TB
+    aiEndpoint["API endpoint<br/>Accepts eRx data"]
+    hasMdoNotes{"MDO notes present?"}
+    patientAgent["Patient information agent<br/>Phone + preferred language"]
+    patientGuard["Patient guardrails<br/>Validate structured output"]
+    indicationAgent["Nurtec indication agent<br/>Acute vs preventive"]
+    indicationGuard["Indication guardrails<br/>Validate structured output"]
+    aiEnd(("End"))
+
+    aiEndpoint --> hasMdoNotes
+    hasMdoNotes -->|Yes| patientAgent
+    hasMdoNotes -->|Yes| indicationAgent
+    hasMdoNotes -->|No| aiEnd
+    patientAgent --> patientGuard --> aiEnd
+    indicationAgent --> indicationGuard --> aiEnd
+  end
+
+  subgraph fulfillment["PHARMACY FULFILLMENT"]
+    direction TB
+    fulfillmentStep["Package & ship to pt"]
+  end
+
+  network --> apiGateway
+  storage --> entry
+  storage --> aiEndpoint
+  clear -->|No| aiEndpoint
+  aiEnd --> ready
+  ready --> fulfillmentStep
+
+  classDef focus stroke:#0f766e,stroke-width:3px;
+  class aiEndpoint,hasMdoNotes,patientAgent,patientGuard,indicationAgent,indicationGuard,aiEnd,nurtec,clear,rules,indication focus;

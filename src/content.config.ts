@@ -21,6 +21,11 @@ const caseStudies = defineCollection({
       }),
     ),
     areas: z.array(z.string().min(1)).min(1),
+    diagram: z.object({
+      title: z.string().min(1),
+      description: z.string().min(1),
+      src: z.string().min(1),
+    }).optional(),
     featured: z.boolean().default(false),
     order: z.number().int().positive(),
     confidentialityReviewed: z.literal(true),

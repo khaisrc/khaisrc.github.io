@@ -357,6 +357,89 @@ a:hover { text-decoration-color: currentColor; }
 .metric-item span { margin-top: var(--space-3xs); font-size: var(--step--1); }
 .metric-item small { margin-top: var(--space-3xs); color: var(--muted-foreground); font-size: 0.68rem; }
 
+.interactive-diagram { margin-top: var(--space-xl); }
+.diagram-heading { display: flex; align-items: end; justify-content: space-between; gap: var(--space-m); }
+.diagram-heading h2 { margin-top: var(--space-2xs); font-size: var(--step-2); }
+.diagram-description { max-width: 48rem; margin-top: var(--space-xs); color: var(--muted-foreground); font-size: var(--step--1); }
+.diagram-controls { display: flex; flex-shrink: 0; gap: var(--space-3xs); }
+.diagram-controls button {
+  position: relative;
+  display: inline-grid;
+  width: 2.1rem;
+  height: 2.1rem;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--foreground);
+  cursor: pointer;
+}
+.diagram-controls button:hover { border-color: var(--foreground); }
+.diagram-controls button::after {
+  position: absolute;
+  z-index: 3;
+  bottom: calc(100% + var(--space-2xs));
+  left: 50%;
+  padding: 0.28rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--foreground);
+  color: var(--background);
+  content: attr(data-tooltip);
+  font-size: 0.68rem;
+  line-height: 1.2;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 0.2rem);
+  transition: opacity 120ms ease, transform 120ms ease;
+  white-space: nowrap;
+}
+.diagram-controls button:hover::after, .diagram-controls button:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+.diagram-icon-collapse { display: none; }
+.interactive-diagram.is-expanded .diagram-icon-expand { display: none; }
+.interactive-diagram.is-expanded .diagram-icon-collapse { display: inline-flex; }
+.diagram-viewport {
+  height: clamp(24rem, 58vw, 38rem);
+  margin-top: var(--space-s);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background-color: #f9f9f9;
+  background-image: radial-gradient(circle, #d9d9d9 0.7px, transparent 0.8px);
+  background-size: 16px 16px;
+  cursor: grab;
+  touch-action: none;
+}
+.diagram-viewport:active { cursor: grabbing; }
+.diagram-viewport:focus-visible { outline: 2px solid var(--ring); outline-offset: 0.25rem; }
+.diagram-canvas { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.diagram-canvas img {
+  position: absolute;
+  inset: var(--space-m);
+  width: calc(100% - 2 * var(--space-m));
+  max-width: none;
+  height: calc(100% - 2 * var(--space-m));
+  max-height: none;
+  object-fit: contain;
+  user-select: none;
+}
+.diagram-hint { margin-top: var(--space-2xs); color: var(--muted-foreground); font-family: var(--font-mono); font-size: 0.67rem; }
+.interactive-diagram.is-expanded {
+  position: fixed;
+  z-index: 200;
+  inset: var(--space-s);
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: var(--space-m);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--background);
+  box-shadow: 0 1rem 4rem color-mix(in oklab, #000 30%, transparent);
+}
+.interactive-diagram.is-expanded .diagram-viewport { flex: 1; height: auto; }
+body.diagram-expanded { overflow: hidden; }
+
 .case-study-body { display: grid; grid-template-columns: minmax(0, var(--measure)) 12rem; gap: var(--space-xl); margin-top: var(--space-xl); }
 .case-study-body-no-nav { grid-template-columns: minmax(0, var(--measure)); }
 .case-study-toc { position: sticky; top: var(--space-xl); align-self: start; order: 2; }
@@ -473,6 +556,10 @@ a:hover { text-decoration-color: currentColor; }
   .metric-item { border-bottom: 1px solid var(--border); }
   .metric-item:nth-of-type(odd) { border-inline-start: 0; }
   .metric-item:nth-last-child(-n + 2) { border-bottom: 0; }
+  .diagram-heading { align-items: start; flex-direction: column; }
+  .diagram-controls { align-self: stretch; }
+  .diagram-controls button { flex: 1; }
+  .diagram-viewport { height: 30rem; }
   .experience-header { align-items: start; flex-direction: column; }
 }
 

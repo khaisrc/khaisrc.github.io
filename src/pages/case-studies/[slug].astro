@@ -2,6 +2,7 @@
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import { ArrowLeft, ExternalLink } from "@lucide/astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import InteractiveDiagram from "../../components/InteractiveDiagram.astro";
 
 export async function getStaticPaths() {
   const projects = (await getCollection("projects", ({ data }) => !data.draft)).sort(
@@ -58,6 +59,8 @@ const sectionHeadings = headings.filter((heading) => heading.depth === 2);
         ))}
       </section>
     )}
+
+    {project.data.diagram && <InteractiveDiagram {...project.data.diagram} />}
 
     <div class:list={["case-study-body", sectionHeadings.length === 0 && "case-study-body-no-nav"]}>
       <div class="prose"><Content /></div>
