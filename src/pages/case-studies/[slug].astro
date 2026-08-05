@@ -42,8 +42,6 @@ const sectionHeadings = headings.filter((heading) => heading.depth === 2);
             <a href={project.data.companyUrl} target="_blank" rel="noreferrer">{project.data.company} <ExternalLink size={13} aria-hidden="true" /></a>
           ) : project.data.company}
         </dd></div>
-        <div><dt>Role</dt><dd>{project.data.role}</dd></div>
-        {project.data.period && <div><dt>Period</dt><dd>{project.data.period}</dd></div>}
         <div><dt>Focus</dt><dd>{project.data.areas.join(", ")}</dd></div>
       </dl>
     </header>
