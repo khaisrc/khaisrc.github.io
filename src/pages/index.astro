@@ -6,7 +6,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const projects = (await getCollection("projects", ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order,
 );
-const homePicks = ["prescription-service", "disaster-recovery-framework", "erx-patient-data-agent"];
+const homePicks = [
+  "prescription-service",
+  "erx-patient-data-agent",
+  "resident-community-messaging",
+];
 const featured = homePicks
   .map((id) => projects.find((project) => project.id === id))
   .filter((project): project is (typeof projects)[number] => Boolean(project));
