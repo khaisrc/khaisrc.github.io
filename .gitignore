@@ -6,6 +6,8 @@ _site
 .jekyll-metadata
 Gemfile.lock
 .vscode
+.agents/
 .remember/
 .DS_Store
 .hermes
+.temp/

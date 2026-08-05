@@ -9,7 +9,5 @@ const projects = (await getCollection("projects", ({ data }) => !data.draft)).so
 ---
 
 <BaseLayout title="Case Studies | Khai Nguyen" description="Engineering case studies across backend platforms, distributed systems, healthcare, real estate, and lending.">
-  <div style="padding-top: 18px">
-    <CaseStudies projects={projects} heading="All case studies" intro="A case-study record of systems, integrations, product workflows, and operational improvements." />
-  </div>
+  <CaseStudies projects={projects} heading="All case studies" intro="A case-study record of systems, integrations, product workflows, and operational improvements." />
 </BaseLayout>

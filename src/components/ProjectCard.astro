@@ -12,25 +12,22 @@ const { data } = project;
 const filters = [data.company, ...data.areas].join("|").toLowerCase();
 ---
 
-<article class="project-card" data-project data-filters={filters}>
-  <span class="card-number">{String(index + 1).padStart(2, "0")}</span>
-  <p class="project-company">{data.company}</p>
-  <h3><a href={`/case-studies/${project.id}/`}>{data.title}</a></h3>
-  <p class="project-description">{data.description}</p>
-  <ul class="tech-list" aria-label="Technology stack">
-    {data.techStack.slice(0, 6).map((tech) => <li class="tech-item">{tech}</li>)}
-  </ul>
-  {data.metrics.length > 0 && (
-    <div class="card-metrics" aria-label="Selected metrics">
-      {data.metrics.slice(0, 3).map((metric) => (
-        <div>
-          <span class="card-metric-value">{metric.value}</span>
-          <span class="card-metric-label">{metric.label}</span>
-        </div>
-      ))}
-    </div>
-  )}
-  <a class="card-link" href={`/case-studies/${project.id}/`} aria-label={`Read ${data.title} case study`}>
-    View case study <ArrowUpRight size={15} />
-  </a>
+<article class="project-entry" data-project data-filters={filters}>
+  <p class="project-index">{String(index + 1).padStart(2, "0")}</p>
+  <div class="project-entry-main">
+    <p class="project-context">{data.company} · {data.areas.slice(0, 2).join(" · ")}</p>
+    <h2><a href={`/case-studies/${project.id}/`}>{data.title}</a></h2>
+    <p class="project-description">{data.description}</p>
+    <ul class="tag-list" aria-label="Technology stack">
+      {data.techStack.slice(0, 6).map((tech) => <li>{tech}</li>)}
+    </ul>
+  </div>
+  <div class="project-entry-aside">
+    {data.metrics[0] && (
+      <p class="entry-metric"><strong>{data.metrics[0].value}</strong><span>{data.metrics[0].label}</span></p>
+    )}
+    <a href={`/case-studies/${project.id}/`} aria-label={`Read ${data.title} case study`}>
+      View case study <ArrowUpRight size={15} aria-hidden="true" />
+    </a>
+  </div>
 </article>

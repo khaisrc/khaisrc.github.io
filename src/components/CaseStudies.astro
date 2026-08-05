@@ -8,37 +8,25 @@ interface Props {
   heading?: string;
   intro?: string;
   showFilters?: boolean;
-  viewAllHref?: string;
-  viewAllLabel?: string;
-  compact?: boolean;
 }
 
 const {
   projects,
-  heading = "Selected case studies",
+  heading = "All case studies",
   intro = "Production systems explained through the problem, technical approach, and measurable result.",
   showFilters = true,
-  viewAllHref,
-  viewAllLabel = "View all case studies",
-  compact = false,
 } = Astro.props;
-const gridClass = compact ? "project-grid project-grid-compact" : "project-grid";
 const filters = ["BlinkRx", "Apartments.com", "Healthcare", "Distributed Systems", "Integrations", "Reliability", "AI"];
 ---
 
-<section class="section shell" id="case-studies" aria-labelledby="projects-title">
-  <div class="section-heading">
-    <div>
-      <p class="eyebrow">Case studies</p>
-      <h2 id="projects-title">{heading}</h2>
-    </div>
+<section class="case-study-index" aria-labelledby="projects-title">
+  <header class="page-heading">
+    <p class="eyebrow">Case studies</p>
+    <h1 id="projects-title">{heading}</h1>
     <p>{intro}</p>
-  </div>
+  </header>
   {showFilters && <ProjectFilters filters={filters} />}
-  <div class={gridClass}>
+  <div class="project-list">
     {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
   </div>
-  {viewAllHref && (
-    <a class="view-all" href={viewAllHref}>{viewAllLabel}</a>
-  )}
 </section>

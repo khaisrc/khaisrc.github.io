@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { ArrowDown, BriefcaseBusiness, CodeXml, Download } from "@lucide/astro";
-import CaseStudies from "../components/CaseStudies.astro";
+import BentoGrid from "../components/BentoGrid.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const projects = (await getCollection("projects", ({ data }) => !data.draft)).sort(
@@ -14,23 +13,5 @@ const featured = homePicks
 ---
 
 <BaseLayout>
-  <section class="hero shell">
-    <div>
-      <p class="eyebrow">California · Staff Software Engineer</p>
-      <h1>Systems that move from <span class="accent">complexity</span> to dependable outcomes.</h1>
-      <p class="hero-copy">
-        I build backend platforms, distributed workflows, and full-stack products across healthcare,
-        real estate, and lending.
-      </p>
-      <div class="hero-actions">
-        <a class="primary-link" href="#case-studies">Explore selected case studies <ArrowDown size={17} /></a>
-      </div>
-    </div>
-    <figure class="system-visual">
-      <img src="/systems-landscape.png" alt="Abstract diagram of connected services, data stores, queues, and operational signals" width="1200" height="800" />
-      <figcaption class="visual-caption">Architecture · Delivery · Operations</figcaption>
-    </figure>
-  </section>
-
-  <CaseStudies projects={featured} compact showFilters={false} viewAllHref="/case-studies/" />
+  <BentoGrid projects={featured} />
 </BaseLayout>

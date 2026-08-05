@@ -1,0 +1,36 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+const navigation = [
+  { href: "/", label: "Home" },
+  { href: "/case-studies/", label: "Case Studies" },
+  { href: "/about/", label: "About" },
+];
+
+const isCurrent = (href: string) => {
+  const normalized = href.replace(/\/$/, "") || "/";
+  return normalized === "/" ? pathname === "/" : pathname === normalized || pathname.startsWith(`${normalized}/`);
+};
+---
+
+<header class="site-sidebar">
+  <div class="sidebar-main">
+    <a class="site-identity" href="/" aria-label="Khai Nguyen, home">
+      <span class="identity-mark" aria-hidden="true">K</span>
+      <span>Khai Nguyen</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <ul class="site-navigation">
+        {navigation.map((item) => (
+          <li><a href={item.href} aria-current={isCurrent(item.href) ? "page" : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+  <div class="sidebar-actions" aria-label="Profile links and appearance">
+    <a class="profile-link" href="https://github.com/khaisrc" target="_blank" rel="noreferrer">GitHub</a>
+    <a class="profile-link" href="https://www.linkedin.com/in/khainguyen/" target="_blank" rel="noreferrer">LinkedIn</a>
+    <ThemeToggle />
+  </div>
+</header>

@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { ArrowUpRight, Blocks, DatabaseZap } from "@lucide/astro";
+import BentoCaseStudyCard from "./BentoCaseStudyCard.astro";
+
+interface Props {
+  projects: CollectionEntry<"projects">[];
+}
+
+const { projects } = Astro.props;
+const [lead, secondary, tertiary] = projects;
+---
+
+<section class="home-bento" aria-labelledby="home-title">
+  <article class="bento-tile bento-intro">
+    <div>
+      <p class="tile-kicker">California · Staff Software Engineer</p>
+      <h1 id="home-title">I turn complex systems into dependable products.</h1>
+    </div>
+    <p>Backend platforms, distributed workflows, and full-stack products across healthcare, real estate, and lending.</p>
+  </article>
+
+  {lead && <BentoCaseStudyCard project={lead} variant="lead" area="lead" />}
+  {secondary && <BentoCaseStudyCard project={secondary} variant="wide" area="secondary" />}
+  {tertiary && <BentoCaseStudyCard project={tertiary} variant="wide" area="tertiary" />}
+
+  <aside class="bento-tile bento-principle" aria-label="Engineering principle">
+    <Blocks size={25} aria-hidden="true" />
+    <p>Migration paths should be observable, reversible, and safe to operate.</p>
+  </aside>
+
+  <figure class="bento-tile bento-visual">
+    <img src="/systems-landscape.png" alt="Abstract diagram of connected services, data stores, queues, and operational signals" width="1200" height="800" />
+  </figure>
+
+  <a class="bento-tile bento-all" href="/case-studies/">
+    <span>Explore all case studies</span>
+    <ArrowUpRight size={18} aria-hidden="true" />
+  </a>
+
+  <aside class="bento-tile bento-focus" aria-label="Engineering focus areas">
+    <DatabaseZap size={25} aria-hidden="true" />
+    <p>Architecture<br />Delivery<br />Operations</p>
+  </aside>
+
+  <div class="bento-tile bento-open" aria-hidden="true"></div>
+</section>
