@@ -1,0 +1,90 @@
+---
+import { Maximize2, Minimize2, Minus, Plus, RotateCcw } from "@lucide/astro";
+
+interface Props {
+  title: string;
+  description: string;
+  src: string;
+}
+
+const { title, description, src } = Astro.props;
+const headingId = `diagram-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`;
+---
+
+<section class="interactive-diagram" aria-labelledby={headingId}>
+  <div class="diagram-heading">
+    <div>
+      <p class="eyebrow">Data flow</p>
+      <h2 id={headingId}>{title}</h2>
+    </div>
+    <div class="diagram-controls" aria-label="Diagram controls">
+      <button type="button" data-diagram-action="zoom-out" data-tooltip="Zoom out" title="Zoom out" aria-label="Zoom out"><Minus size={16} aria-hidden="true" /></button>
+      <button type="button" data-diagram-action="reset" data-tooltip="Reset diagram view" title="Reset diagram view" aria-label="Reset diagram view"><RotateCcw size={15} aria-hidden="true" /></button>
+      <button type="button" data-diagram-action="zoom-in" data-tooltip="Zoom in" title="Zoom in" aria-label="Zoom in"><Plus size={16} aria-hidden="true" /></button>
+      <button type="button" data-diagram-action="expand" data-tooltip="Expand diagram" title="Expand diagram" aria-label="Expand diagram" aria-pressed="false">
+        <span class="diagram-icon-expand" aria-hidden="true"><Maximize2 size={15} /></span>
+        <span class="diagram-icon-collapse" aria-hidden="true"><Minimize2 size={15} /></span>
+      </button>
+    </div>
+  </div>
+  <p class="diagram-description">{description}</p>
+  <div class="diagram-viewport" tabindex="0" aria-label={`${title}. Use the controls to zoom, or drag to pan.`}>
+    <div class="diagram-canvas"><img src={src} alt={description} draggable="false" /></div>
+  </div>
+  <p class="diagram-hint">Drag to pan. Use the controls or pinch to zoom.</p>
+</section>
+
+<script>
+  import Panzoom from "@panzoom/panzoom";
+
+  const initializeDiagram = (diagram: HTMLElement) => {
+    const image = diagram.querySelector<HTMLImageElement>(".diagram-canvas img");
+    const viewport = diagram.querySelector<HTMLElement>(".diagram-viewport");
+    if (!image || !viewport) return;
+
+    const attachControls = () => {
+      const panzoom = Panzoom(image, {
+        animate: true,
+        duration: 180,
+        maxScale: 5,
+        minScale: 0.5,
+        step: 0.25,
+      });
+
+      diagram.querySelector<HTMLButtonElement>('[data-diagram-action="zoom-in"]')?.addEventListener("click", () => panzoom.zoomIn());
+      diagram.querySelector<HTMLButtonElement>('[data-diagram-action="zoom-out"]')?.addEventListener("click", () => panzoom.zoomOut());
+      diagram.querySelector<HTMLButtonElement>('[data-diagram-action="reset"]')?.addEventListener("click", () => panzoom.reset());
+
+      viewport.addEventListener("pointerdown", () => viewport.focus());
+      viewport.addEventListener("wheel", (event) => {
+        if (document.activeElement !== viewport) return;
+        event.preventDefault();
+        panzoom.zoomWithWheel(event);
+      }, { passive: false });
+
+      const expandButton = diagram.querySelector<HTMLButtonElement>('[data-diagram-action="expand"]');
+      const setExpanded = (expanded: boolean) => {
+        diagram.classList.toggle("is-expanded", expanded);
+        expandButton?.setAttribute("aria-pressed", String(expanded));
+        expandButton?.setAttribute("aria-label", expanded ? "Close expanded diagram" : "Expand diagram");
+        expandButton?.setAttribute("data-tooltip", expanded ? "Collapse diagram" : "Expand diagram");
+        expandButton?.setAttribute("title", expanded ? "Collapse diagram" : "Expand diagram");
+        document.body.classList.toggle("diagram-expanded", expanded);
+        requestAnimationFrame(() => panzoom.reset());
+      };
+
+      expandButton?.addEventListener("click", () => setExpanded(!diagram.classList.contains("is-expanded")));
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && diagram.classList.contains("is-expanded")) {
+          setExpanded(false);
+          expandButton?.focus();
+        }
+      });
+    };
+
+    if (image.complete) attachControls();
+    else image.addEventListener("load", attachControls, { once: true });
+  };
+
+  document.querySelectorAll<HTMLElement>(".interactive-diagram").forEach(initializeDiagram);
+</script>
