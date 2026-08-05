@@ -15,25 +15,23 @@ confidentialityReviewed: true
 draft: false
 ---
 
-## Problem
+## Overview
 
 Apartment communities needed an online scheduling workflow that could connect prospective renters with tour availability exposed through external systems.
 
-## Contribution
+## What I Did
 
 I built the backend service from scratch and integrated third-party APIs into the Apartments.com product flow.
-
-## Technical approach
 
 - Translated external scheduling behavior into stable application-facing service operations.
 - Handled the boundary between Apartments.com workflows and third-party APIs.
 - Built the service for production use within the existing marketplace environment.
 - Coordinated technical delivery with the surrounding product and business workflow.
 
+## Engineering Decisions
+
+Third-party integrations work best when the product owns a stable internal contract. That boundary limits how much vendor behavior spreads through the rest of the application.
+
 ## Outcome
 
 The service enabled online tour scheduling for multifamily apartment communities. The retained sources do not contain defensible adoption or conversion metrics, so no quantitative outcome is claimed.
-
-## Engineering judgment
-
-Third-party integrations work best when the product owns a stable internal contract. That boundary limits how much vendor behavior spreads through the rest of the application.

@@ -15,25 +15,23 @@ confidentialityReviewed: true
 draft: false
 ---
 
-## Problem
+## Overview
 
 Loan-origination and dealership applications needed to exchange workflow events without creating tightly coupled, synchronous dependencies between two enterprise systems.
 
-## Contribution
+## What I Did
 
 I built NServiceBus publisher and consumer services that connected the lending platform with dealership workflows as part of a broader C#/.NET product environment.
-
-## Technical approach
 
 - Modeled business events around publisher and consumer responsibilities.
 - Used asynchronous NServiceBus messaging between the two system contexts.
 - Integrated the services with the surrounding ASP.NET and SQL Server application environment.
 - Supported related loan-origination functionality in the desktop and web product stack.
 
+## Engineering Decisions
+
+Messaging created a cleaner ownership boundary than direct synchronous coupling. Each application could publish or react to workflow changes while retaining control of its own domain behavior.
+
 ## Outcome
 
 The services established asynchronous communication between the loan and dealership systems. The retained material does not contain transaction-volume or time-saved measurements, so the impact is described qualitatively.
-
-## Engineering judgment
-
-Messaging created a cleaner ownership boundary than direct synchronous coupling. Each application could publish or react to workflow changes while retaining control of its own domain behavior.

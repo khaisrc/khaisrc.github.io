@@ -21,15 +21,13 @@ confidentialityReviewed: true
 draft: false
 ---
 
-## Problem
+## Overview
 
 As the prescription platform became a system of record, recovery knowledge remained distributed across infrastructure and application owners. A serious failure could stop prescription processing without a shared, tested response path.
 
-## Contribution
+## What I Did
 
 I defined the recovery framework, authored eight runbooks across the service's major failure domains, and designed and facilitated a staging gameday with engineers operating the procedures live.
-
-## Technical approach
 
 - Documented recovery responsibilities for application, database, cluster, network, stream, secret, delivery, and monitoring failures.
 - Defined recovery and data-loss objectives appropriate for a critical pharmacy workflow.
@@ -37,10 +35,10 @@ I defined the recovery framework, authored eight runbooks across the service's m
 - Captured timestamped validation evidence and revised the runbooks around gaps discovered during execution.
 - Made recovery procedures searchable for faster use during incidents.
 
+## Engineering Decisions
+
+A recovery plan is only a hypothesis until someone follows it under realistic conditions. The gameday measured the procedure, exposed ambiguity, and gave the team a concrete basis for improving readiness.
+
 ## Outcome
 
 The gameday executed four real recovery scenarios and validated a 30-minute recovery time. The resulting runbook set turned service recovery from undocumented team knowledge into a repeatable operational capability.
-
-## Engineering judgment
-
-A recovery plan is only a hypothesis until someone follows it under realistic conditions. The gameday measured the procedure, exposed ambiguity, and gave the team a concrete basis for improving readiness.

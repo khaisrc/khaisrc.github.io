@@ -19,15 +19,13 @@ confidentialityReviewed: true
 draft: false
 ---
 
-## Problem
+## Overview
 
 New pharmacy-benefit partners exposed different request models, response formats, and asynchronous behaviors. The existing claim path was not designed to absorb those differences cleanly, and failure recovery often required manual attention.
 
-## Contribution
+## What I Did
 
 I implemented two production partner integrations and the supporting claim submission, reversal, retry, and observability workflows needed to operate them reliably.
-
-## Technical approach
 
 - Isolated partner-specific request translation and response mapping behind stable internal contracts.
 - Supported both immediate API responses and asynchronous webhook completion.
@@ -35,10 +33,10 @@ I implemented two production partner integrations and the supporting claim submi
 - Applied partner-level throttling to protect external APIs and internal workers.
 - Built monitoring for claim outcomes and operational investigation.
 
+## Engineering Decisions
+
+External integrations should not leak every partner variation into the product. A translation boundary kept the internal workflow stable while explicit retry and rate controls handled the realities of third-party systems.
+
 ## Outcome
 
 The integrations added approximately 323,000 insurance claims per month across two new partners while preserving a consistent operating model for submission, reversal, and failure handling.
-
-## Engineering judgment
-
-External integrations should not leak every partner variation into the product. A translation boundary kept the internal workflow stable while explicit retry and rate controls handled the realities of third-party systems.

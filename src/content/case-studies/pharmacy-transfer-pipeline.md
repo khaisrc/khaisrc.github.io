@@ -21,15 +21,13 @@ confidentialityReviewed: true
 draft: false
 ---
 
-## Problem
+## Overview
 
 Onboarding a pharmacy partner required moving thousands of existing prescriptions into a new operating system. The prior process depended on a long sequence of manual steps, making large transfers difficult to monitor, pause, recover, or repeat safely.
 
-## Contribution
+## What I Did
 
 I designed and built the end-to-end transfer workflow, then evolved it from an initial import path into a production pipeline with administrative controls and an accompanying export capability.
-
-## Technical approach
 
 - Decomposed each prescription import into independently retryable subtasks.
 - Used SQS workers for asynchronous execution and idempotency controls to make retries safe.
@@ -37,10 +35,10 @@ I designed and built the end-to-end transfer workflow, then evolved it from an i
 - Built file validation, conversion, and prescription-image rendering tools.
 - Replaced operator scripts with a guided Django administration workflow.
 
+## Engineering Decisions
+
+Large batch work rarely fails as one clean unit. Designing around resumable, idempotent steps made partial failure a routine operating condition instead of an exceptional recovery project.
+
 ## Outcome
 
 The pipeline imported more than 10,700 prescriptions across three partner onboardings. It replaced more than 14 manual steps with a workflow that operators could start, observe, pause, and resume without direct database or host access.
-
-## Engineering judgment
-
-Large batch work rarely fails as one clean unit. Designing around resumable, idempotent steps made partial failure a routine operating condition instead of an exceptional recovery project.

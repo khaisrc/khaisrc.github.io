@@ -17,25 +17,23 @@ confidentialityReviewed: true
 draft: false
 ---
 
-## Problem
+## Overview
 
 Loan-processing agents worked in an internal CRM while applicants primarily responded from their phones. Communication needed to fit both contexts without forcing agents into a separate tool.
 
-## Contribution
+## What I Did
 
 I developed and deployed the bidirectional SMS workflow within a three-month delivery window, covering the middle-tier API and CRM integration.
-
-## Technical approach
 
 - Integrated Twilio's SMS API with ASP.NET Core services.
 - Added AngularJS CRM workflows for conversation-style agent messaging.
 - Stored communication state in SQL Server and connected inbound replies to the correct workflow.
 - Delivered the feature as part of the existing internal application rather than a separate messaging product.
 
+## Engineering Decisions
+
+The main product decision was to meet each user in the interface they already used. The integration joined those two contexts while keeping conversation state inside the operational CRM.
+
 ## Outcome
 
 Agents could send and receive applicant messages from the CRM while applicants continued using standard SMS. Historical monthly volume notes contain inconsistent totals, so they are intentionally omitted.
-
-## Engineering judgment
-
-The main product decision was to meet each user in the interface they already used. The integration joined those two contexts while keeping conversation state inside the operational CRM.

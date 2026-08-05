@@ -24,15 +24,13 @@ confidentialityReviewed: true
 draft: false
 ---
 
-## Problem
+## Overview
 
 Medication-label requirements differ by state, but the existing format was rigid. Each regulatory change could require an engineering release, and label generation took long enough to interrupt a pharmacist's workflow.
 
-## Contribution
+## What I Did
 
 I built a configurable label platform with separate preview and print paths, grouped state rules, and administrative tools that let operations teams maintain templates directly.
-
-## Technical approach
 
 - Modeled state-specific fields and grouped compatible states into ten reusable template families.
 - Built preview and print APIs so pharmacists could validate a label before producing it.
@@ -40,10 +38,10 @@ I built a configurable label platform with separate preview and print paths, gro
 - Exposed template management through Django administration instead of source-code changes.
 - Optimized rendering and font handling to produce labels in under one second.
 
+## Engineering Decisions
+
+The durable solution was not a larger set of conditionals. Treating regulation as configuration created a controlled way to absorb future state changes while keeping validation and rendering behavior consistent.
+
 ## Outcome
 
 The system supports requirements across all 50 states and processes approximately 27,000 to 39,000 preview, print, and update operations per month. Template changes no longer require an engineering deployment.
-
-## Engineering judgment
-
-The durable solution was not a larger set of conditionals. Treating regulation as configuration created a controlled way to absorb future state changes while keeping validation and rendering behavior consistent.
