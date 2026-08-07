@@ -3,11 +3,11 @@ import { getCollection } from "astro:content";
 import CaseStudies from "../../components/CaseStudies.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const projects = (await getCollection("projects", ({ data }) => !data.draft)).sort(
+const caseStudies = (await getCollection("caseStudies", ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order,
 );
 ---
 
 <BaseLayout title="Case Studies | Khai Nguyen" description="Engineering case studies across backend platforms, distributed systems, healthcare, real estate, and lending.">
-  <CaseStudies projects={projects} heading="All case studies" intro="A case-study record of systems, integrations, product workflows, and operational improvements." />
+  <CaseStudies caseStudies={caseStudies} heading="All case studies" intro="A case-study record of systems, integrations, product workflows, and operational improvements." />
 </BaseLayout>

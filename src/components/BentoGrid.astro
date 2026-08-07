@@ -4,25 +4,25 @@ import { ArrowUpRight, Blocks, DatabaseZap } from "@lucide/astro";
 import BentoCaseStudyCard from "./BentoCaseStudyCard.astro";
 
 interface Props {
-  projects: CollectionEntry<"projects">[];
+  caseStudies: CollectionEntry<"caseStudies">[];
 }
 
-const { projects } = Astro.props;
-const [lead, secondary, tertiary] = projects;
+const { caseStudies } = Astro.props;
+const [lead, secondary, tertiary] = caseStudies;
 ---
 
 <section class="home-bento" aria-labelledby="home-title">
   <article class="bento-tile bento-intro">
     <div>
-      <p class="tile-kicker">California · Staff Software Engineer</p>
+      <p class="tile-kicker">Software Engineering</p>
       <h1 id="home-title">I turn complex systems into dependable products.</h1>
     </div>
     <p>Backend platforms, distributed workflows, and full-stack products across healthcare, real estate, and lending.</p>
   </article>
 
-  {lead && <BentoCaseStudyCard project={lead} variant="lead" area="lead" />}
-  {secondary && <BentoCaseStudyCard project={secondary} variant="wide" area="secondary" />}
-  {tertiary && <BentoCaseStudyCard project={tertiary} variant="wide" area="tertiary" />}
+  {lead && <BentoCaseStudyCard caseStudy={lead} variant="lead" area="lead" />}
+  {secondary && <BentoCaseStudyCard caseStudy={secondary} variant="wide" area="secondary" />}
+  {tertiary && <BentoCaseStudyCard caseStudy={tertiary} variant="wide" area="tertiary" />}
 
   <aside class="bento-tile bento-principle" aria-label="Engineering principle">
     <Blocks size={25} aria-hidden="true" />

@@ -33,4 +33,4 @@ const caseStudies = defineCollection({
   }),
 });
 
-export const collections = { projects: caseStudies };
+export const collections = { caseStudies };

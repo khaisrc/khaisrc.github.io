@@ -1,32 +1,44 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import ProjectCard from "./ProjectCard.astro";
-import ProjectFilters from "./ProjectFilters.astro";
+import type { CollectionEntry } from 'astro:content';
+import CaseStudyCard from './CaseStudyCard.astro';
+import CaseStudyFilters from './CaseStudyFilters.astro';
 
 interface Props {
-  projects: CollectionEntry<"projects">[];
+  caseStudies: CollectionEntry<'caseStudies'>[];
   heading?: string;
   intro?: string;
   showFilters?: boolean;
 }
 
 const {
-  projects,
-  heading = "All case studies",
-  intro = "Production systems explained through the problem, technical approach, and measurable result.",
+  caseStudies,
+  heading = 'All case studies',
+  intro = 'Production systems explained through the problem, technical approach, and measurable result.',
   showFilters = true,
 } = Astro.props;
-const filters = ["BlinkRx", "Apartments.com", "Healthcare", "Distributed Systems", "Integrations", "Reliability", "AI"];
+const filters = [
+  'BlinkRx',
+  'Apartments.com',
+  'Healthcare',
+  'Distributed Systems',
+  'Integrations',
+  'Reliability',
+  'AI',
+];
 ---
 
-<section class="case-study-index" aria-labelledby="projects-title">
-  <header class="page-heading">
-    <p class="eyebrow">Case studies</p>
-    <h1 id="projects-title">{heading}</h1>
+<section class='case-study-index' aria-labelledby='case-studies-title'>
+  <header class='page-heading'>
+    <p class='eyebrow'>Case studies</p>
+    <h1 id='case-studies-title'>{heading}</h1>
     <p>{intro}</p>
   </header>
-  {showFilters && <ProjectFilters filters={filters} />}
-  <div class="project-list">
-    {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+  {showFilters && <CaseStudyFilters filters={filters} />}
+  <div class='case-study-list'>
+    {
+      caseStudies.map((caseStudy, index) => (
+        <CaseStudyCard caseStudy={caseStudy} index={index} />
+      ))
+    }
   </div>
 </section>

@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { ArrowUpRight } from "@lucide/astro";
+
+interface Props {
+  caseStudy: CollectionEntry<"caseStudies">;
+  index: number;
+}
+
+const { caseStudy, index } = Astro.props;
+const { data } = caseStudy;
+const filters = [data.company, ...data.areas].join("|").toLowerCase();
+---
+
+<article class="case-study-entry" data-case-study data-filters={filters}>
+  <p class="case-study-index-number">{String(index + 1).padStart(2, "0")}</p>
+  <div class="case-study-entry-main">
+    <p class="case-study-context">{data.company} · {data.areas.slice(0, 2).join(" · ")}</p>
+    <h2><a href={`/case-studies/${caseStudy.id}/`}>{data.title}</a></h2>
+    <p class="case-study-description">{data.description}</p>
+    <ul class="tag-list" aria-label="Technology stack">
+      {data.techStack.slice(0, 6).map((tech) => <li>{tech}</li>)}
+    </ul>
+  </div>
+  <div class="case-study-entry-aside">
+    {data.metrics[0] && (
+      <p class="entry-metric"><strong>{data.metrics[0].value}</strong><span>{data.metrics[0].label}</span></p>
+    )}
+    <a href={`/case-studies/${caseStudy.id}/`} aria-label={`Read ${data.title} case study`}>
+      View case study <ArrowUpRight size={15} aria-hidden="true" />
+    </a>
+  </div>
+</article>

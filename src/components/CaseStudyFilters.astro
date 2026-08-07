@@ -17,15 +17,15 @@ const { filters } = Astro.props;
 
 <script>
   const buttons = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
-  const projects = document.querySelectorAll<HTMLElement>("[data-project]");
+  const entries = document.querySelectorAll<HTMLElement>("[data-case-study]");
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
       const selected = button.dataset.filter ?? "all";
       buttons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-      projects.forEach((project) => {
-        const values = project.dataset.filters?.split("|") ?? [];
-        project.hidden = selected !== "all" && !values.includes(selected);
+      entries.forEach((entry) => {
+        const values = entry.dataset.filters?.split("|") ?? [];
+        entry.hidden = selected !== "all" && !values.includes(selected);
       });
     });
   });
