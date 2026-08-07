@@ -47,7 +47,15 @@ const socialImage = new URL(image, Astro.site);
       if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
     </script>
     <title>{title}</title>
-    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "e8f6f5e183da41758e48d682db74ac26"}'></script>
+    {
+      import.meta.env.PROD && (
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "e8f6f5e183da41758e48d682db74ac26"}'
+        />
+      )
+    }
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
