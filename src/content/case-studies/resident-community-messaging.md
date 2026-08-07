@@ -1,10 +1,10 @@
 ---
-title: "Resident and Community Messaging"
-company: "Apartments.com · CoStar Group"
+title: "Multi-channel Messaging System"
+company: "CoStar Group"
 companyUrl: "https://www.apartments.com/"
 role: "Senior Software Engineer"
 period: "2019-2022"
-summary: "Backend messaging workflows supporting communication between apartment communities and residents."
+summary: "Backend messaging workflows supporting communication between apartment communities and residents on Apartments.com and real estate agents and prospective home buyers on Homes.com."
 description: "Designed REST APIs and background services deployed to an AWS-hosted VPC, with exposure to Kafka-based publish/subscribe patterns for asynchronous service communication."
 techStack: ["REST APIs", "Background services", "AWS VPC", "Kafka pub/sub exposure", "Service-oriented architecture"]
 metrics: []
