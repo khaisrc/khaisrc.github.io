@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const bookmarks = [
+  {
+    url: "https://use-the-index-luke.com/",
+    title: "Use The Index, Luke",
+    description: "A guide to database performance for developers — explains how SQL indexes work and how to write queries that use them well.",
+  },
+];
+---
+
+<BaseLayout pageTitle="Bookmarks" description="Links to interesting pages, mostly software engineering related.">
+  <section class="simple-page" aria-labelledby="bookmarks-title">
+    <p class="eyebrow">Saved for later</p>
+    <h1 id="bookmarks-title">Bookmarks</h1>
+    <div class="prose">
+      <ul class="bookmark-list">
+        {bookmarks.map((bookmark) => (
+          <li class="bookmark-item">
+            <a href={bookmark.url} target="_blank" rel="noreferrer">{bookmark.title}</a>
+            <p class="bookmark-description">{bookmark.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .bookmark-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .bookmark-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .bookmark-description {
+    margin: 0;
+    opacity: 0.7;
+    font-size: 0.9em;
+  }
+</style>

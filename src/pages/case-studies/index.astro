@@ -8,6 +8,6 @@ const caseStudies = (await getCollection("caseStudies", ({ data }) => !data.draf
 );
 ---
 
-<BaseLayout title="Case Studies | Khai Nguyen" description="Engineering case studies across backend platforms, distributed systems, healthcare, real estate, and lending.">
+<BaseLayout pageTitle="Case Studies" description="Engineering case studies across backend platforms, distributed systems, healthcare, real estate, and lending.">
   <CaseStudies caseStudies={caseStudies} heading="All case studies" intro="A case-study record of systems, integrations, product workflows, and operational improvements." />
 </BaseLayout>

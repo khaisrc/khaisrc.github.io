@@ -24,7 +24,7 @@ const { Content, headings } = await render(caseStudy);
 const sectionHeadings = headings.filter((heading) => heading.depth === 2);
 ---
 
-<BaseLayout title={`${caseStudy.data.title} | Khai Nguyen`} description={caseStudy.data.description}>
+<BaseLayout pageTitle={caseStudy.data.title} description={caseStudy.data.description}>
   <article class="case-study-page">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <a href="/case-studies/"><ArrowLeft size={14} aria-hidden="true" /> All case studies</a>
