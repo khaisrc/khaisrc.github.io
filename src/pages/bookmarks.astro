@@ -5,12 +5,45 @@ const bookmarks = [
   {
     url: "https://use-the-index-luke.com/",
     title: "Use The Index, Luke",
+    siteName: "Markus Winand",
     description: "A guide to database performance for developers — explains how SQL indexes work and how to write queries that use them well.",
+    category: "sql",
+    tags: ["databases", "performance", "indexing", "query-optimization"],
+    createdOn: "2026-08-17T16:51:42Z",
+    modifiedOn: "2026-08-17T16:51:42Z",
+    deletedOn: null,
   },
   {
     url: "https://unsung.aresluna.org/favourite-well-made-apps-and-sites/",
     title: "Favourite well-made apps and sites",
+    siteName: "Unsung",
     description: "A curated list of thoughtfully designed software and websites, selected for craft and functionality.",
+    category: "design",
+    tags: ["apps", "curation", "inspiration", "ux"],
+    createdOn: "2026-08-17T17:00:57Z",
+    modifiedOn: "2026-08-17T17:00:57Z",
+    deletedOn: null,
+  },
+  {
+    url: "https://www.makingsoftware.com/",
+    title: "Making Software",
+    siteName: "Dan Hollick",
+    description: "An illustrated reference manual explaining how everyday software concepts actually work — touchscreens, blur algorithms, bezier curves, rasterisation, and more.",
+    category: "reference",
+    tags: ["software-engineering", "fundamentals", "illustrated", "computer-science"],
+    createdOn: "2026-08-17",
+    modifiedOn: "2026-08-17",
+    deletedOn: null,
+  },
+  {
+    url: "https://component.gallery/",
+    title: "The Component Gallery",
+    description: "A reference repository of UI components drawn from real-world design systems — useful for seeing how the same component is named and implemented across different teams.",
+    category: "ui",
+    tags: ["design-systems", "components", "frontend", "reference"],
+    createdOn: "2026-08-17",
+    modifiedOn: "2026-08-17",
+    deletedOn: null,
   },
 ];
 ---
@@ -23,7 +56,18 @@ const bookmarks = [
       <ul class="bookmark-list">
         {bookmarks.map((bookmark) => (
           <li class="bookmark-item">
-            <a href={bookmark.url} target="_blank" rel="noreferrer">{bookmark.title}</a>
+            <a class="bookmark-link" href={bookmark.url} target="_blank" rel="noreferrer">
+              <img
+                class="bookmark-favicon"
+                src={`https://www.google.com/s2/favicons?domain=${new URL(bookmark.url).hostname}&sz=32`}
+                width="16"
+                height="16"
+                alt=""
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+              {bookmark.title}{bookmark.siteName && ` — ${bookmark.siteName}`}
+            </a>
             <p class="bookmark-description">{bookmark.description}</p>
           </li>
         ))}
@@ -45,6 +89,19 @@ const bookmarks = [
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
+  }
+
+  .bookmark-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .bookmark-favicon {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    flex-shrink: 0;
   }
 
   .bookmark-description {
