@@ -2,6 +2,20 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
+const projects = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/projects" }),
+  schema: z.object({
+    title: z.string().min(1),
+    summary: z.string().min(1),
+    url: z.url().optional(),
+    launchDate: z.coerce.date().optional(),
+    status: z.enum(["upcoming", "active", "archived"]).default("active"),
+    tags: z.array(z.string().min(1)).default([]),
+    order: z.number().int().positive(),
+    draft: z.boolean().default(false),
+  }),
+});
+
 const caseStudies = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/case-studies" }),
   schema: z.object({
@@ -33,4 +47,4 @@ const caseStudies = defineCollection({
   }),
 });
 
-export const collections = { caseStudies };
+export const collections = { caseStudies, projects };
