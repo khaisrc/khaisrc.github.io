@@ -1,7 +1,7 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import { ArrowLeft } from "@lucide/astro";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
@@ -26,7 +26,7 @@ const dateLabel = data.date.toLocaleDateString("en-US", {
 });
 ---
 
-<BaseLayout pageTitle={data.title} description={data.summary}>
+<BaseLayout pageTitle={data.title} description={data.summary} image={`/blog/${post.id}/og.png`}>
   <article class="case-study-page">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <a href="/blog/"><ArrowLeft size={14} aria-hidden="true" /> All posts</a>
