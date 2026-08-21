@@ -1,0 +1,80 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<BaseLayout pageTitle="Blog" description="Writing on engineering, tooling, and things I've built.">
+  <section class="case-study-index" aria-labelledby="blog-title">
+    <header class="page-heading">
+      <p class="eyebrow">Blog</p>
+      <h1 id="blog-title">Writing</h1>
+      <p>Engineering notes, tools, and occasional deep dives.</p>
+    </header>
+    <div class="blog-list">
+      {posts.map((post) => {
+        const dateLabel = post.data.date.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        });
+        return (
+          <article class="blog-list-item">
+            <time class="blog-date eyebrow" datetime={post.data.date.toISOString()}>{dateLabel}</time>
+            <h2 class="blog-list-title">
+              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+            </h2>
+            <p class="blog-list-summary">{post.data.summary}</p>
+            {post.data.tags.length > 0 && (
+              <ul class="tag-list" aria-label="Tags">
+                {post.data.tags.map((tag) => <li>{tag}</li>)}
+              </ul>
+            )}
+          </article>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-top: 2rem;
+  }
+
+  .blog-list-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .blog-date {
+    display: block;
+  }
+
+  .blog-list-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .blog-list-title a {
+    text-decoration: none;
+  }
+
+  .blog-list-title a:hover {
+    text-decoration: underline;
+  }
+
+  .blog-list-summary {
+    color: var(--color-muted);
+    margin: 0;
+    max-width: 60ch;
+  }
+</style>

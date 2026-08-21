@@ -1,0 +1,50 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import { ArrowLeft } from "@lucide/astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { data } = post;
+
+const dateLabel = data.date.toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
+---
+
+<BaseLayout pageTitle={data.title} description={data.summary}>
+  <article class="case-study-page">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/blog/"><ArrowLeft size={14} aria-hidden="true" /> All posts</a>
+    </nav>
+
+    <header class="case-study-header">
+      <p class="eyebrow"><time datetime={data.date.toISOString()}>{dateLabel}</time></p>
+      <h1>{data.title}</h1>
+      <p class="case-study-summary">{data.summary}</p>
+      {data.tags.length > 0 && (
+        <ul class="tag-list" aria-label="Tags">
+          {data.tags.map((tag) => <li>{tag}</li>)}
+        </ul>
+      )}
+    </header>
+
+    <div class="case-study-body case-study-body-no-nav">
+      <div class="prose"><Content /></div>
+    </div>
+  </article>
+</BaseLayout>
