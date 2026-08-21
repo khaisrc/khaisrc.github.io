@@ -1,6 +1,7 @@
 ---
 title: "Fullstack Weekly"
 summary: "A weekly newsletter on fullstack engineering — practical patterns, architecture trade-offs, and the tooling decisions that actually matter in production."
+url: "https://fullstackweekly.github.io/"
 launchDate: "2026-08-23"
 status: "upcoming"
 tags: ["newsletter", "fullstack", "writing"]
