@@ -1,0 +1,47 @@
+---
+title: "I built a TUI to manage Claude sessions because the app couldn't"
+date: 2026-08-21
+summary: "Claude Desktop has no way to unarchive sessions through the UI. So I wrote a Go TUI to manage them directly — browse, filter, archive, unarchive, delete."
+tags: ["go", "tui", "claude", "tooling"]
+draft: false
+---
+
+import LinkPreview from "../../components/LinkPreview.astro";
+import Lightbox from "../../components/Lightbox.astro";
+
+If you use Claude Desktop heavily, you've probably hit the archive limit. Claude starts auto-archiving older sessions, and there's no way to undo that through the app itself. The sessions aren't gone — they're sitting in a JSON file on your filesystem — but the UI just won't surface them again.
+
+I got tired of manually editing JSON, so I built claude-sesh-manager: a terminal UI in Go that gives you actual control over your sessions.
+
+<LinkPreview url="https://github.com/khaisrc/claude-sesh-manager" />
+
+## What it does
+
+- Browse all your sessions sorted by last modified
+- Type-to-filter as you go
+- Multi-select for bulk actions
+- Archive, unarchive, view details, or send to Trash
+
+It works with Claude Code CLI transcripts, Claude Desktop sessions, and Cowork sessions — they all live in predictable paths, so it just scans them all.
+
+<Lightbox src="https://github.com/khaisrc/claude-sesh-manager/raw/main/docs/screenshot.svg" alt="claude-sesh-manager screenshot" />
+
+## Why Go + TUI
+
+Honestly, I just wanted a fast binary with no runtime dependencies. The tool reads local files, no network, no auth — a single Go binary felt right. I used [Bubble Tea](https://github.com/charmbracelet/bubbletea) for the TUI, which has a nice Elm-style model that makes it easy to reason about state transitions without things getting messy.
+
+GoReleaser handles cross-platform builds — macOS Intel and Apple Silicon are both covered. If you're on Homebrew or just want to grab a binary and go, the releases page has you.
+
+## The actual problem it solves
+
+The core issue is that Claude's session storage is just files, but the app treats it like a black box. Once a session gets archived, it's effectively invisible unless you go digging in `~/Library/Application Support`. This tool is a thin layer over that filesystem — no clever tricks, just direct access to what's already there.
+
+If you've been living with this friction, give it a try. If you're on a different OS or want to add features, PRs are open.
+
+## Limitations
+
+A few things worth knowing before you install it:
+
+**CLI-first, for now.** This tool targets people comfortable in a terminal. There's no GUI — you're navigating a TUI with keyboard shortcuts. If that's not your workflow, it's probably not the right fit yet.
+
+**macOS and Linux only.** Windows isn't supported at the moment. The session file paths and some filesystem assumptions are Unix-specific. Windows support is on the roadmap, and so is a native GUI — the plan is to eventually make this accessible to users who don't live in a terminal. For now though, it's a CLI tool for CLI people.
