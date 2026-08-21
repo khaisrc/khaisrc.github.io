@@ -1,0 +1,72 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+}
+const { src, alt } = Astro.props;
+const id = `lb-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<figure class="lightbox-figure">
+  <button class="lightbox-trigger" aria-label={`View full size: ${alt}`} data-dialog={id}>
+    <img src={src} alt={alt} loading="lazy" decoding="async" />
+  </button>
+  <dialog class="lightbox-dialog" id={id}>
+    <img src={src} alt={alt} />
+  </dialog>
+</figure>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>(".lightbox-trigger").forEach((btn) => {
+    const dialog = document.getElementById(btn.dataset.dialog!) as HTMLDialogElement;
+    btn.addEventListener("click", () => dialog.showModal());
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+  });
+</script>
+
+<style>
+  .lightbox-figure {
+    margin-block: 1.5rem;
+  }
+
+  .lightbox-trigger {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: zoom-in;
+  }
+
+  .lightbox-trigger img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+  }
+
+  .lightbox-dialog {
+    padding: 0;
+    border: none;
+    background: transparent;
+    max-width: min(95vw, 1400px);
+    max-height: 95vh;
+    overflow: hidden;
+  }
+
+  .lightbox-dialog img {
+    display: block;
+    max-width: 100%;
+    max-height: 95vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .lightbox-dialog::backdrop {
+    background: rgb(0 0 0 / 0.85);
+    backdrop-filter: blur(4px);
+  }
+</style>
